@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: MIT
+name: Replay
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+jobs:
+  quick:
+    name: Manifest; check_dominance.py under python -O and without -O; comparison under the declared policy; negative control
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check MANIFEST.sha256
+        run: sha256sum -c MANIFEST.sha256
+      - name: Run check_dominance.py in copies of the package (cwd = package root; standard library only)
+        run: |
+          python3 -I -c 'import sys; print(sys.version)'
+          for d in run runO neg1; do mkdir -p "$RUNNER_TEMP/$d"; cp -R code results "$RUNNER_TEMP/$d/"; done
+          cd "$RUNNER_TEMP/runO" && python3 -I -B -O code/check_dominance.py > out.txt
+          cd "$RUNNER_TEMP/run" && python3 -I -B code/check_dominance.py > out.txt
+      - name: Compare with the recorded output
+        # Declared policy (also in README.md, ENVIRONMENT.txt and REPLAY_RECEIPT.md): Part A (exact) identical line by line;
+        # Part B (floating point) identical outside printed decimals, so every PASS/FAIL line and the final line match
+        # exactly; printed decimals within 1e-5 relative or one unit in the last printed digit, whichever is larger.
+        run: |
+          python3 -I .github/ci/compare_output.py "$RUNNER_TEMP/runO/out.txt" results/check_dominance.txt
+          python3 -I .github/ci/compare_output.py "$RUNNER_TEMP/run/out.txt" results/check_dominance.txt
+      - name: Negative control under -O (standard moment of J_a + J_(n-a) changed from 1/(n-1) to 1/n)
+        run: |
+          cd "$RUNNER_TEMP/neg1"
+          sed -i 's/check((trF - P) \/ ((n - 1) \* P) == Fraction(1, n - 1), "J+J first moment")/check((trF - P) \/ ((n - 1) * P) == Fraction(1, n), "J+J first moment")/' code/check_dominance.py
+          grep -q 'Fraction(1, n), "J+J first moment"' code/check_dominance.py
+          if python3 -I -B -O code/check_dominance.py > out.txt 2>&1; then echo "wrong value not detected"; exit 1; fi
+          grep -q 'FAIL: J+J first moment' out.txt
+          echo "negative control detected"
+      - name: Working tree unchanged
+        run: test -z "$(git status --porcelain)"

@@ -1,0 +1,34 @@
+Part A1. All irreducible blocks of small Gram frames (exact).
+  n=2 complex largest nontrivial m2 = 0.111111, with m1 = 0.333333
+  n=2 real    largest nontrivial m2 = 0.235918, with m1 = 0.485714
+  n=3 complex largest nontrivial m2 = 0.535327, with m1 = 0.705189
+  n=3 real    largest nontrivial m2 = 0.063613, with m1 = 0.189443
+  n=4 complex largest nontrivial m2 = 0.415301, with m1 = 0.575721
+  n=4 real    largest nontrivial m2 = 0.532616, with m1 = 0.653595
+  n=5 complex largest nontrivial m2 = 0.271797, with m1 = 0.413350
+  n=5 real    largest nontrivial m2 = 0.270230, with m1 = 0.345866
+  n=6 complex largest nontrivial m2 = 0.201923, with m1 = 0.271808
+  n=6 real    largest nontrivial m2 = 0.022019, with m1 = 0.092657
+  checked: real traces, positivity, Tr B^2 <= (Tr B)^2, Schur-Weyl vanishing,
+  trivial block, Young trace bound, Lieb splitting, standard-block identities,
+  Plancherel identity n! per(A o conj A) = sum f Tr B^2, dimension sum.
+Part A2. Real rank two: Tr F_A <= 4 per A (exact rationals).
+  largest Tr F_A / per A found: 2.420276 (bound 4)
+  J_a (+) J_(n-a): both standard moments equal 1/(n-1) for 3 <= n <= 8 (exact).
+Part A3. Repeated orthonormal basis: Tr C_1 / per A = d (exact).
+  equality Tr C_1 = d per A holds for 1 <= d <= 4, d <= n <= 7.
+Part B1. Strict merge inequality (tolerance 1e-9).
+  x coth x < (3/2) log(2 cosh(2x/3)) on (0,40]: PASS; gap at 0+ = 0.039721
+  E log(c+aX+bY) - E log(c+CZ) < 0 at 40 random (a,b,c): PASS
+Part B2. Two-colour trace bound (integrated form), random complex frames.
+  Tr C_k / per A <= bound for 3 <= n <= 7, d = 2,3, all k: PASS (largest ratio to bound 0.221)
+Part B3. Sharp first-trace inequality Tr C_1/per A <= d/(n+d-1) (E e^{nL}-1)/t.
+  holds on random complex frames, 3 <= n <= 7, d = 2,3: PASS
+Part B4. Tr C_1/per A <= 3 log(per(A+I)/per A) <= 6 sqrt(e n d).
+  holds on random complex frames, 2 <= n <= 8, 1 <= d <= 4: PASS
+Part B5. Concentric-circle frame in h = d-1 directions: Rayleigh bound on the test space.
+  h=1 circles=(3, 6) a=0.75 n=36: D=2.122341 <= ||p||^(2h)=5.450002; Rayleigh >= (M/(nD))(L/a)=0.942356
+  h=2 circles=(3,) a=0.75 n=24: D=1.603311 <= ||p||^(2h)=2.330962; Rayleigh >= (M/(nD))(L/a)=0.623709
+  h=2 circles=(3, 4) a=0.8 n=56: D=4.872828 <= ||p||^(2h)=26.418030; Rayleigh >= (M/(nD))(L/a)=0.384787
+  PASS
+All checks passed.

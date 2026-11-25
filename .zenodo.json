@@ -1,0 +1,110 @@
+{
+ "title": "Asymptotic permanental dominance at fixed Gram rank",
+ "upload_type": "publication",
+ "publication_type": "preprint",
+ "description": "<p><strong>Unrefereed research candidate.</strong> The permanent of a matrix is the determinant without minus signs. For a table of inner products of n vectors (a positive semidefinite Gram matrix), the permutations of the vectors split into symmetry types, one for each Young diagram with n boxes, and each type has a positive semidefinite matrix block; the all-symmetric type gives exactly the permanent. Lieb's permanental dominance conjecture (1966), restricted to the ordinary immanants, says that the average eigenvalue of every block is at most the permanent; Lavi's quadratic conjecture (2026) says the same for the mean square of the eigenvalues. The stronger permanent-on-top conjecture is false, so these averaged inequalities are what may survive.</p><p><strong>What was known.</strong> Lieb's version for ordinary immanants holds for n &le; 15 (Pate; Li) and for all n at Gram rank at most three (Pate 1999, Theorem 2); Pate's Theorem 4 gives eventual dominance for the shapes (n+s, n<sup>k</sup>). Lavi proved the quadratic version for n &le; 5. At real rank two both hold for every n, by the rank-two permanent-on-top theorem.</p><p><strong>Results.</strong> Fix the Gram rank d. Both normalised moments tend to zero as n &rarr; &infin;, uniformly over all non-trivial irreducible representations of S<sub>n</sub> and all inputs of rank at most d, so both inequalities hold at each fixed rank for all sufficiently large n. The threshold n<sub>0</sub>(d) is not computed and no new case of finite order is claimed. For the quadratic inequality this is new at every complex rank d &ge; 2 and real rank d &ge; 3; for ordinary immanants it is new from rank four, and there only for four-row shapes with &lambda;<sub>4</sub> &ge; 3 and &lambda;<sub>2</sub> &gt; &lambda;<sub>3</sub> (everything else at rank at most four is due to Pate). The standard representation is eventually the worst case; at complex rank d its largest first and second moments are asymptotic to (d&minus;1) log n / n and (d&minus;1)(log n)<sup>2</sup>/n. Both moments still tend to zero when d log n = o(&radic;n), and the first moment does whenever d log n = o(n). For the standard representation alone, explicit bounds hold for every n and d (first moment at most (6&radic;(e n d) &minus; 1)/(n &minus; 1)).</p><p><strong>Method.</strong> Each block's trace is bounded by an ordered-partition matrix whose trace is estimated by Gaussian averaging; a new strict inequality for expected logarithms of sums of exponential variables shows that the dimension of the representation outgrows this bound when two rows of the diagram are long; diagrams with one dominant row are handled by counting; the standard shape uses the sharp Bapat&ndash;Sunder growth of the earlier Evidence Press release 10.5281/zenodo.24509057.</p><p><strong>Limits.</strong> The threshold order is not computed, so no individual finite case is settled. Only the symmetric-group (immanant) form of Lieb's conjecture is treated, not the subgroup form. Real-rank constants are known only up to a factor.</p><p><strong>Contents.</strong> The paper (LaTeX source and PDF), a Python standard-library script that checks the ingredients of the proofs on explicit finite examples (exact arithmetic for the algebraic identities, floating point with a declared tolerance for the analytic inequalities) and its recorded output, plus the bibliography, a machine-readable index, a research-gate record, a review summary, a replay receipt and SHA-256 sums. The script exits with an error on any failed check, also under python -O.</p><p><strong>Assurance.</strong> Written proofs; the script checks ingredients and is not part of any proof. Internal AI-assisted review only: a combined five-role Claude review panel, a proof audit of every proof by the lead, one revision round, a verification re-review with a proof audit of the new and rewritten proofs, and a clean replay with a negative control. No Astra/Codex review took place. This is not peer review, independent reproduction or formal verification. Creator: Anonymous. Text CC0-1.0; code MIT.</p>",
+ "creators": [
+  {
+   "name": "Anonymous"
+  }
+ ],
+ "access_right": "open",
+ "license": "cc-zero",
+ "version": "0.1.0-candidate",
+ "publication_date": "2026-11-25",
+ "keywords": [
+  "permanent",
+  "immanant",
+  "Lieb permanental dominance conjecture",
+  "Lavi quadratic conjecture",
+  "positive semidefinite matrix",
+  "Gram matrix",
+  "Schur power matrix",
+  "symmetric group representations",
+  "Bapat-Sunder",
+  "boson sampling"
+ ],
+ "notes": "Code (*.py and the CI workflow) is MIT; prose, manuscript, recorded outputs and records are CC0-1.0.",
+ "related_identifiers": [
+  {
+   "identifier": "https://github.com/ipitchford/asymptotic-permanental-dominance-fixed-rank/tree/v0.1.0-candidate",
+   "relation": "isSupplementTo",
+   "scheme": "url"
+  },
+  {
+   "identifier": "https://evidencepress.org/releases/asymptotic-permanental-dominance-fixed-rank/",
+   "relation": "isDocumentedBy",
+   "scheme": "url"
+  },
+  {
+   "identifier": "10.1109/focs.2017.89",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.5281/zenodo.24509057",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/0024-3795(86)90220-x",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1017/s0017089500000525",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1512/iumj.1967.16.16008",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/s0024-3795(99)00035-x",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.1016/j.laa.2015.10.034",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "10.4171/90-2/48",
+   "relation": "references",
+   "scheme": "doi"
+  },
+  {
+   "identifier": "arXiv:1704.03486",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2609.13412",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2609.37461",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "arXiv:2202.01867",
+   "relation": "references",
+   "scheme": "arxiv"
+  },
+  {
+   "identifier": "https://hexagonmath.org/pdf/2611.00429v1",
+   "relation": "references",
+   "scheme": "url"
+  },
+  {
+   "identifier": "https://github.com/blueberryvertigo/permanent-on-top-rank-two/blob/8a2195b295fe8ab187b895840f3b3238d997292c/pot.typ",
+   "relation": "references",
+   "scheme": "url"
+  }
+ ]
+}

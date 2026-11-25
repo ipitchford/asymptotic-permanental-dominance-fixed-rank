@@ -1,0 +1,246 @@
+{
+ "schemaVersion": "1.0",
+ "provenance": "Compiled 25 November 2026 for 0.1.0-candidate from the dated searches of the internal AI-assisted review (24 November 2026), the source retrieval and reading record, the corpus overlap check, refs.bib, REVIEW_SUMMARY.md and the paper's own positioning (Sections 1 and 9). It records scrutiny performed, not historical priority.",
+ "contributionMap": [
+  {
+   "claim": "At every fixed Gram rank d, both normalised moments of every non-trivial irreducible Schur-power block tend to zero as n grows, uniformly over shapes and inputs; so Lieb's ordinary-immanant inequality and Lavi's quadratic inequality hold at each fixed rank for all n >= n_0(d) (threshold not computed)",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.1(1), Sections 2-5",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "Semantic Scholar, arXiv and general web searches up to 24 November 2026 (domain and editor roles of the internal review, and the lead); works citing Lieb (1966), Pate (1999), Li (arXiv:2609.13412) and Lavi (hexagon:2611.00429v1); Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "asymptotic permanental dominance; immanant inequality fixed rank; Lieb permanental dominance conjecture large n; uniform over characters Schur power matrix; Lavi quadratic permanent conjecture; permanent-on-top rank; boson bunching partial distinguishability symmetry sectors"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read (Lavi preprint, Li, Anari-Gurvits-Oveis Gharan-Saberi, Ma, Djokovic, Wanless, the Evidence Press Bapat-Sunder release, and Pate 1999 supplied by the owner)",
+     "query": "Lavi Conjecture 1.1, Lemma 2.2, Theorem 2.1, eqs (2.5)-(2.6), Theorem 4.1; Li Theorems 1.3 and 1.8, Section 2.2; Pate 1999 Theorems 1-4; AGOS Theorem 1, eq. (2), Definition 1; Ma Lemma 3.1; Bapat-Sunder release Proposition 2.4, Theorem 1.1, Lemma 3.1, Section 6, Appendix A"
+    }
+   ],
+   "closestPriorWork": "Pate 1999 Theorem 2 (all n at rank <= 3; all rank-4 shapes except four rows with lambda_4 >= 3, lambda_2 > lambda_3) and Theorem 4 (shapes (n+s, n^k) at large n); Li Theorems 1.3 and 1.8; Lavi Theorem 4.1 (n <= 5); real rank-two permanent-on-top (liqsweep; EP Bapat-Sunder Appendix A)",
+   "verdict": "partially-known-cited",
+   "verdictNote": "ordinary immanants at rank <= 3 are Pate's (credited); new: uniformity over all shapes at fixed rank, the quadratic inequality at complex d >= 2 and real d >= 3, and the ordinary inequality for the rank-4 shapes Pate does not cover and at rank >= 5"
+  },
+  {
+   "claim": "The standard shape is eventually the worst; over C the largest first and second moments are asymptotic to (d-1) log n / n and (d-1)(log n)^2 / n; real rank constants within [1/2, d-1] and [1/4, d-1]; real rank two of order 1/n",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.1(2)-(3), Proposition 4.3, Section 6",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "Semantic Scholar, arXiv and general web searches up to 24 November 2026 (domain and editor roles of the internal review, and the lead); works citing Lieb (1966), Pate (1999), Li (arXiv:2609.13412) and Lavi (hexagon:2611.00429v1); Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "asymptotic permanental dominance; immanant inequality fixed rank; Lieb permanental dominance conjecture large n; uniform over characters Schur power matrix; Lavi quadratic permanent conjecture; permanent-on-top rank; boson bunching partial distinguishability symmetry sectors"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read (Lavi preprint, Li, Anari-Gurvits-Oveis Gharan-Saberi, Ma, Djokovic, Wanless, the Evidence Press Bapat-Sunder release, and Pate 1999 supplied by the owner)",
+     "query": "Lavi Conjecture 1.1, Lemma 2.2, Theorem 2.1, eqs (2.5)-(2.6), Theorem 4.1; Li Theorems 1.3 and 1.8, Section 2.2; Pate 1999 Theorems 1-4; AGOS Theorem 1, eq. (2), Definition 1; Ma Lemma 3.1; Bapat-Sunder release Proposition 2.4, Theorem 1.1, Lemma 3.1, Section 6, Appendix A"
+    }
+   ],
+   "closestPriorWork": "EP Bapat-Sunder release (log n growth of the top eigenvalue of the first compound)",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "sharp moment constants not found; the Bapat-Sunder growth is the earlier EP release, credited"
+  },
+  {
+   "claim": "Growing rank: M_2 -> 0 if d log n = o(sqrt n); M_1 -> 0 if d log n = o(n)",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.2, Section 7",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "Semantic Scholar, arXiv and general web searches up to 24 November 2026 (domain and editor roles of the internal review, and the lead); works citing Lieb (1966), Pate (1999), Li (arXiv:2609.13412) and Lavi (hexagon:2611.00429v1); Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "asymptotic permanental dominance; immanant inequality fixed rank; Lieb permanental dominance conjecture large n; uniform over characters Schur power matrix; Lavi quadratic permanent conjecture; permanent-on-top rank; boson bunching partial distinguishability symmetry sectors"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read (Lavi preprint, Li, Anari-Gurvits-Oveis Gharan-Saberi, Ma, Djokovic, Wanless, the Evidence Press Bapat-Sunder release, and Pate 1999 supplied by the owner)",
+     "query": "Lavi Conjecture 1.1, Lemma 2.2, Theorem 2.1, eqs (2.5)-(2.6), Theorem 4.1; Li Theorems 1.3 and 1.8, Section 2.2; Pate 1999 Theorems 1-4; AGOS Theorem 1, eq. (2), Definition 1; Ma Lemma 3.1; Bapat-Sunder release Proposition 2.4, Theorem 1.1, Lemma 3.1, Section 6, Appendix A"
+    }
+   ],
+   "closestPriorWork": "none found",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "no growing-rank result found"
+  },
+  {
+   "claim": "Explicit bounds for the standard shape at every n and d; first moment -> 0 iff d = o(n); Lavi's inequality for the standard shape whenever 6 sqrt(e n d)(log n + 5) <= n",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.3, Section 8",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "Semantic Scholar, arXiv and general web searches up to 24 November 2026 (domain and editor roles of the internal review, and the lead); works citing Lieb (1966), Pate (1999), Li (arXiv:2609.13412) and Lavi (hexagon:2611.00429v1); Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "asymptotic permanental dominance; immanant inequality fixed rank; Lieb permanental dominance conjecture large n; uniform over characters Schur power matrix; Lavi quadratic permanent conjecture; permanent-on-top rank; boson bunching partial distinguishability symmetry sectors"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read (Lavi preprint, Li, Anari-Gurvits-Oveis Gharan-Saberi, Ma, Djokovic, Wanless, the Evidence Press Bapat-Sunder release, and Pate 1999 supplied by the owner)",
+     "query": "Lavi Conjecture 1.1, Lemma 2.2, Theorem 2.1, eqs (2.5)-(2.6), Theorem 4.1; Li Theorems 1.3 and 1.8, Section 2.2; Pate 1999 Theorems 1-4; AGOS Theorem 1, eq. (2), Definition 1; Ma Lemma 3.1; Bapat-Sunder release Proposition 2.4, Theorem 1.1, Lemma 3.1, Section 6, Appendix A"
+    }
+   ],
+   "closestPriorWork": "none found",
+   "verdict": "new-in-bounded-search",
+   "verdictNote": "no explicit every-n bound found"
+  },
+  {
+   "claim": "Method: ordered-partition trace domination (Young/Pieri, Lieb block inequality), Gaussian averaging of traces with a sharp first-trace constant, a strict merge inequality for expected logarithms of sums of exponential variables against hook-formula dimension growth, and the Bapat-Sunder growth for the standard shape",
+   "unit": "method",
+   "paperLocation": "Sections 2-8",
+   "searches": [
+    {
+     "date": "2026-11-24",
+     "corpus": "Semantic Scholar, arXiv and general web searches up to 24 November 2026 (domain and editor roles of the internal review, and the lead); works citing Lieb (1966), Pate (1999), Li (arXiv:2609.13412) and Lavi (hexagon:2611.00429v1); Evidence Press corpus (site papers/ and the batch corpus list)",
+     "query": "asymptotic permanental dominance; immanant inequality fixed rank; Lieb permanental dominance conjecture large n; uniform over characters Schur power matrix; Lavi quadratic permanent conjecture; permanent-on-top rank; boson bunching partial distinguishability symmetry sectors"
+    },
+    {
+     "date": "2026-11-24",
+     "corpus": "the cited works, obtained and read (Lavi preprint, Li, Anari-Gurvits-Oveis Gharan-Saberi, Ma, Djokovic, Wanless, the Evidence Press Bapat-Sunder release, and Pate 1999 supplied by the owner)",
+     "query": "Lavi Conjecture 1.1, Lemma 2.2, Theorem 2.1, eqs (2.5)-(2.6), Theorem 4.1; Li Theorems 1.3 and 1.8, Section 2.2; Pate 1999 Theorems 1-4; AGOS Theorem 1, eq. (2), Definition 1; Ma Lemma 3.1; Bapat-Sunder release Proposition 2.4, Theorem 1.1, Lemma 3.1, Section 6, Appendix A"
+    }
+   ],
+   "closestPriorWork": "Lieb (1966) block inequality as proved by Djokovic (1969); Gaussian integral identities (classical); Anari-Gurvits-Oveis Gharan-Saberi (approximation); EP Bapat-Sunder release",
+   "verdict": "partially-known-cited",
+   "verdictNote": "standard tools, credited; the merge inequality (Lemma 3.1) and its use against dimension growth were not found in the searched sources"
+  }
+ ],
+ "sourcesReadInFull": [
+  {
+   "citation": "Lavi, Y. (2026), A conjecture on the permanent of positive semidefinite matrices, hexagon:2611.00429v1",
+   "usedFor": "quadratic conjecture, block decomposition, identities (2.5)-(2.6), n <= 5",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://hexagonmath.org/pdf/2611.00429v1"
+  },
+  {
+   "citation": "Li, Y. (2026), arXiv:2609.13412",
+   "usedFor": "orders up to 15; long first row; account of Pate",
+   "readWhat": "Sections 1-2 in full; statements of the rest",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://arxiv.org/abs/2609.13412"
+  },
+  {
+   "citation": "Pate, T. H. (1999), Linear Algebra Appl. 295:31-59",
+   "usedFor": "rank <= 3 coverage; uncovered rank-4 shapes; Theorem 4",
+   "readWhat": "whole paper (owner-supplied copy)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1016/S0024-3795(99)00035-X"
+  },
+  {
+   "citation": "Anari, N., Gurvits, L., Oveis Gharan, S. and Saberi, A. (2017), FOCS 2017 (arXiv:1704.03486)",
+   "usedFor": "Lemma 2.4 eigenvalue bound",
+   "readWhat": "Sections 1-3",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1109/FOCS.2017.89"
+  },
+  {
+   "citation": "Anonymous (2026), Sharp logarithmic growth of the Bapat-Sunder eigenvalue ratio, Evidence Press",
+   "usedFor": "sharp growth; real rank-two theorem (Appendix A)",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.5281/zenodo.24509057"
+  },
+  {
+   "citation": "Ma, Y. (2026), arXiv:2609.37461",
+   "usedFor": "Chollet remark (Lemma 3.1)",
+   "readWhat": "abstract and Lemma 3.1",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://arxiv.org/abs/2609.37461"
+  },
+  {
+   "citation": "Djokovic, D. Z. (1969), Glasgow Math. J. 10:52-54",
+   "usedFor": "Lieb block inequality as proved",
+   "readWhat": "whole paper",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.1017/S0017089500000525"
+  },
+  {
+   "citation": "Wanless, I. M. (2022), The Physics and Mathematics of Elliott Lieb, vol. 2 (arXiv:2202.01867)",
+   "usedFor": "survey of the conjecture",
+   "readWhat": "whole paper (arXiv version)",
+   "date": "2026-11-24",
+   "evidenceLocator": "https://doi.org/10.4171/90-2/48"
+  }
+ ],
+ "limitationTriage": [
+  {
+   "limitation": "Threshold n_0(d) not computed (compactness argument), so no new case of finite order is settled",
+   "closingQuestion": "Can the gap in Lemma 3.1 and the error terms of Section 4 be made explicit to give n_0(d)?",
+   "triedOrSearched": "considered in the revision round; would not settle rank 4 without a finite verification of the orders between 16 and n_0",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problem 1",
+   "whyNotClosedNow": "research-level; stated as open"
+  },
+  {
+   "limitation": "Real-rank constants known only up to a factor",
+   "closingQuestion": "Are the real constants (d-1)/2 and (d-1)/4?",
+   "triedOrSearched": "real rank-three construction of the Bapat-Sunder release suggests these candidates",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problem 2",
+   "whyNotClosedNow": "research-level"
+  },
+  {
+   "limitation": "Growing-rank ranges not sharp",
+   "closingQuestion": "Is d = o(n) sufficient for both moments?",
+   "triedOrSearched": "Theorem 1.3 shows d = o(n) necessary; Theorem 1.2 needs d log n = o(n) or o(sqrt n)",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problem 3",
+   "whyNotClosedNow": "research-level"
+  },
+  {
+   "limitation": "Only irreducible characters of S_n, not the subgroup form of Lieb's conjecture",
+   "closingQuestion": "Does the method extend to characters of subgroups?",
+   "triedOrSearched": "not attempted",
+   "estimatedCost": "weeks",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "Section 9, open problem 4",
+   "whyNotClosedNow": "outside scope"
+  },
+  {
+   "limitation": "Source bundle shipped no checks for this paper",
+   "closingQuestion": "Are the proof ingredients checked on finite examples, failing correctly under python -O?",
+   "triedOrSearched": "new standard-library script without assert; negative control exits 1 under -O",
+   "estimatedCost": "hours",
+   "cheap": true,
+   "decision": "CLOSED",
+   "reasonOpen": "",
+   "whyNotClosedNow": ""
+  },
+  {
+   "limitation": "Novelty rests on searches of limited scope",
+   "closingQuestion": "Would further indexes change attribution?",
+   "triedOrSearched": "Semantic Scholar, arXiv and web searches; cited sources read, including Pate 1999; Evidence Press corpus checked",
+   "estimatedCost": "subscription indexes",
+   "cheap": false,
+   "decision": "OPEN",
+   "reasonOpen": "subscription indexes were outside the searched corpus",
+   "whyNotClosedNow": "recorded here; the paper positions its results against the sources read"
+  }
+ ],
+ "extensionScout": {
+  "by": "the internal review panel, the re-reviewer and the lead",
+  "date": "2026-11-24",
+  "proposals": [
+   "a self-contained sharp first-trace constant d - 1",
+   "an explicit every-(n, d) bound on the standard quadratic moment and an explicit Lavi range for the standard shape",
+   "an effective threshold n_0(d) for all shapes",
+   "real-rank constants",
+   "closing the growing-rank gap",
+   "a Chollet corollary"
+  ],
+  "actions": [
+   "done: Proposition 4.3",
+   "done: Theorem 1.3",
+   "not done: stated as open problem 1",
+   "not done: open problem 2",
+   "not done: open problem 3",
+   "rejected: subsumed by Ma Lemma 3.1, stated as a remark"
+  ]
+ }
+}

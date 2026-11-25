@@ -1,0 +1,545 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[left=24mm,right=24mm,top=22mm,bottom=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Imm}{\operatorname{Imm}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\K}{\mathbb K}
+\newcommand{\E}{\mathbb E}
+\newcommand{\std}{\mathrm{st}}
+\title{Asymptotic permanental dominance at fixed Gram rank}
+\author{Anonymous\\[3pt]{\small DOI \href{https://doi.org/10.5281/zenodo.24536861}{10.5281/zenodo.24536861}}}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a positive semidefinite matrix $A$ and an irreducible representation of the symmetric group $S_n$, the Schur power of $A$ has a positive semidefinite block whose trace is the immanant of $A$. Lieb's permanental dominance conjecture (1966), restricted to these ordinary immanants, says that the average eigenvalue of every such block is at most the permanent of $A$. Lavi's quadratic conjecture (2026) says the same for the mean square of the eigenvalues, relative to the squared permanent. We study both inequalities when $A$ is the Gram matrix of $n$ vectors in a space of fixed dimension $d$ (its Gram rank). We prove that at every fixed rank both normalised moments tend to zero as $n\to\infty$, uniformly over all nontrivial irreducible representations and all such matrices. So both inequalities hold at each fixed rank for all sufficiently large $n$; the threshold is not computed, and no new case of finite order is claimed. For the quadratic inequality this asymptotic statement is new at every complex rank $d\ge2$ and real rank $d\ge3$; for ordinary immanants it is new from rank four, since ranks up to three were already covered by Pate. The worst case is eventually the standard representation, and at complex rank $d\ge2$ the largest first and second moments are asymptotic to $(d-1)(\log n)/n$ and $(d-1)(\log n)^2/n$. Both moments still tend to zero when the rank grows with $n$, provided $d\log n=o(\sqrt n)$; the first moment does so whenever $d\log n=o(n)$. For the standard representation alone we give explicit bounds valid for every $n$ and $d$, which show that its first moment tends to zero exactly when $d=o(n)$. The proofs combine a strict inequality for expected logarithms of sums of exponential variables, a Gaussian bound on traces of ordered-partition matrices, and the sharp growth of the Bapat--Sunder eigenvalue ratio.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+This section states the two inequalities, explains why they matter, summarises what was known, states the new results and gives a guide to the rest of the paper.
+
+\subsection{The two inequalities}
+Throughout, $\K$ is $\R$ or $\C$. A \emph{Gram matrix} over $\K$ is a matrix $A=(a_{ij})_{i,j=1}^n$ with $a_{ij}=v_i^*v_j$ for vectors $v_1,\dots,v_n\in\K^d$; these are exactly the positive semidefinite (real symmetric or Hermitian) matrices. The \emph{Gram rank} of $A$ is the dimension of the span of the $v_i$, which equals the rank of $A$. Real vectors are regarded as vectors in $\C^d$ whenever this is convenient. For a permutation $\sigma$ of $[n]=\{1,\dots,n\}$ put
+\[
+ a_\sigma=\prod_{i=1}^n a_{i\sigma(i)},\qquad \per A=\sum_{\sigma\in S_n}a_\sigma .
+\]
+Let $\lambda\vdash n$ be a partition of $n$ (a weakly decreasing list of positive integers with sum $n$), let $\rho_\lambda$ be a unitary irreducible representation of $S_n$ labelled by $\lambda$ in the usual way, $f^\lambda$ its dimension and $\chi_\lambda$ its character. The \emph{Schur-power block} and the \emph{immanant} are
+\[
+ B_\lambda(A)=\sum_{\sigma\in S_n}a_\sigma\,\rho_\lambda(\sigma^{-1}),\qquad
+ \Imm_\lambda(A)=\Tr B_\lambda(A)=\sum_{\sigma}\chi_\lambda(\sigma)a_\sigma .
+\]
+The trivial partition $(n)$ gives $B_{(n)}=\per A$, and the sign partition $(1^n)$ gives $\det A$. For $A$ with positive diagonal (so that $\per A>0$, see Section~\ref{sec:prelim}) define the two normalised moments
+\[
+ m_1(\lambda,A)=\frac{\Tr B_\lambda(A)}{f^\lambda\per A},\qquad
+ m_2(\lambda,A)=\frac{\Tr B_\lambda(A)^2}{f^\lambda(\per A)^2}.
+\]
+Both equal one for $\lambda=(n)$. Since $B_\lambda(A)$ is positive semidefinite (Lemma~\ref{lem:blocks}), $m_1$ is the average eigenvalue of $B_\lambda(A)$ divided by $\per A$, and $m_2$ is the mean square eigenvalue divided by $(\per A)^2$; note that $m_2$ is a \emph{squared} quantity, the root mean square ratio being $\sqrt{m_2}$.
+
+\emph{Lieb's conjecture for ordinary immanants} asserts $m_1(\lambda,A)\le1$, that is $\Imm_\lambda(A)\le f^\lambda\per A$, for all $n$, $\lambda\vdash n$ and positive semidefinite $A$ \cite{Lieb,Wanless}. Lieb's full conjecture concerns generalised matrix functions for characters of all subgroups of $S_n$; this paper treats only the irreducible characters of $S_n$ itself. \emph{Lavi's quadratic conjecture} \cite[Conjecture~1.1]{Lavi} asserts $m_2(\lambda,A)\le1$; by Cauchy--Schwarz on the eigenvalues, $m_1^2\le m_2$, so it implies the ordinary-immanant conjecture \cite[Theorem~2.1]{Lavi}. Positive diagonal rescaling $A\mapsto DAD$ multiplies every $a_\sigma$ by $\prod_id_i^2$ and so leaves both moments unchanged; it is therefore enough to consider \emph{correlation matrices}, Gram matrices of unit vectors.
+
+For $j=1,2$ we study the worst case over all nontrivial shapes and all inputs of rank at most $d$:
+\[
+ M_j^{\K}(n,d)=\sup\bigl\{m_j(\lambda,A):\ \lambda\vdash n,\ \lambda\ne(n),\ A\in\mathcal G_\K(n,d)\bigr\},
+\]
+where $\mathcal G_\K(n,d)$ is the set of correlation matrices of order $n$ over $\K$ with rank at most $d$.
+Both conjectures say $M_j^\K(n,d)\le1$ for every $n$ and $d$.
+
+\subsection{Why the inequalities matter}
+The Schur power matrix of $A$ is the $n!\times n!$ matrix $\Pi(A)$ with entries $\prod_ta_{\sigma(t)\tau(t)}$. Up to a unitary change of basis it is the direct sum of the blocks $B_\lambda(A)$, each repeated $f^\lambda$ times \cite[Lemma~2.2]{Lavi}, and $\per A$ is one of its eigenvalues. The \emph{permanent-on-top conjecture} asserted that $\per A$ is its largest eigenvalue; it would imply both inequalities above, but it is false already at order five \cite{Shchesnovich}, and individual eigenvalues of a block can exceed the permanent by a factor of order $\log n$ even at complex rank two \cite{EPBS}. The two moment inequalities are the natural averaged replacements: they ask that eigenvalues larger than the permanent be compensated within each block. The quadratic one is also strong enough to imply Chollet's inequality $\per(A\circ B)\le\per A\per B$ \cite[Theorem~2.1]{Lavi}. In linear optics, Gram matrices of rank $d$ can describe photons with $d$ internal (for example temporal) modes and permanents give bunching probabilities \cite{EPBS}; read this way, fixed $d$ and many photons is the regime of experiments with partially distinguishable photons.
+
+\subsection{What was known}
+Lieb proved the dominance inequality for principal block products \cite{Lieb}. For ordinary immanants the conjecture is known for $n\le15$: Pate proved it through order 13 and identified three remaining shapes at orders 14 and 15 \cite[Theorem~3 and the remarks after it]{Pate99}, which Li settles \cite[Theorem~1.8]{Li}. Li also proves it for every fixed tail $\rho$ once the first row is long enough, at every rank \cite[Theorem~1.3]{Li}. Pate proved the ordinary inequality for all shapes $(p,q^u,r^v,2^s,1^t)$ with $u\le2$ and $v\le1$, for every positive semidefinite Hermitian matrix \cite[Theorem~2]{Pate99}; the case $u\le1$ combines his earlier results \cite[Theorem~1]{Pate99}. This family contains every shape with at most three rows. Since blocks with more than $d$ rows vanish at rank $d$ (Lemma~\ref{lem:blocks}), the ordinary-immanant conjecture therefore holds for every $n$ at Gram rank at most three. At rank four the same family still contains every shape except those with four rows, $\lambda_4\ge3$ and $\lambda_2>\lambda_3$; these remaining shapes are where the ordinary-immanant part of Theorem~\ref{thm:main} below is new. Pate also proved an eventual result of a different kind: for fixed $k$ and $s$, the normalised immanants of the shapes $(n+s,n^k)$ satisfy dominance once $n$ is large, at every rank \cite[Theorem~4 and (1.2)]{Pate99}. Lavi proved the quadratic conjecture for $n\le5$ \cite[Theorem~4.1]{Lavi}. At real rank two the permanent-on-top inequality $\Pi(A)\preceq(\per A)I$ holds \cite{Liq}, with a complete proof in \cite[Appendix~A]{EPBS}; so both inequalities hold there for every $n$. To our knowledge no result controlled all shapes simultaneously at a fixed rank beyond three, and no result described the size of the worst moments.
+
+\begin{center}\small
+\begin{tabular}{lll}\toprule
+ & ordinary immanants ($m_1\le1$) & quadratic ($m_2\le1$)\\\midrule
+all ranks & $n\le15$ \cite{Li}; long first row \cite{Li} & $n\le5$ \cite{Lavi}\\
+real rank 2 & all $n$ \cite{Liq,EPBS} & all $n$ \cite{Liq,EPBS}\\
+rank $\le3$ & all $n$ \cite{Pate99} & --\\
+fixed rank $d$ & all large $n$ (new for $d\ge4$) & all large $n$ (new except real rank 2)\\\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Results}
+Logarithms are natural. The first theorem is the fixed-rank result. The standard representation is the one labelled $(n-1,1)$, of dimension $n-1$.
+\begin{theorem}\label{thm:main}
+Let $d\ge2$ be fixed and $\K\in\{\R,\C\}$.
+\begin{enumerate}
+\item $M_1^\K(n,d)\to0$ and $M_2^\K(n,d)\to0$ as $n\to\infty$. Over all shapes with $n-\lambda_1\ge2$, both moments are $o(1/n)$ uniformly in the shape and the input.
+\item For all sufficiently large $n$, the supremum $M_j^\K(n,d)$ equals the supremum of $m_j((n-1,1),A)$ over the same inputs, for $j=1,2$.
+\item Over $\C$,
+\[
+ M_1^\C(n,d)\sim(d-1)\frac{\log n}{n},\qquad M_2^\C(n,d)\sim(d-1)\frac{(\log n)^2}{n}.
+\]
+Over $\R$ with $d\ge3$, $M_1^\R(n,d)$ and $M_2^\R(n,d)$ are of exact orders $(\log n)/n$ and $(\log n)^2/n$; more precisely their ratios to these scales lie eventually in $[\frac12-o(1),\,d-1+o(1)]$ and $[\frac14-o(1),\,d-1+o(1)]$. Over $\R$ with $d=2$, the standard moments satisfy $\sup_Am_j((n-1,1),A)\in[1/(n-1),\,3/(n-1)]$ for all $n\ge2$, so $1/(n-1)\le M_j^\R(n,2)\le3/(n-1)$ for all large $n$.
+\end{enumerate}
+In particular, at each fixed rank both conjectures hold for all orders $n\ge n_0(d)$. The proof does not determine $n_0(d)$.
+\end{theorem}
+At rank one every nontrivial block vanishes (Lemma~\ref{lem:blocks}). The uniformity over shapes is the point of the theorem: earlier results fix the order or a family of shapes in advance. Part 2 concerns the supremum over matrices: for a given matrix the largest moment need not occur at the standard shape. The theorem also coexists with large individual eigenvalues: a block can have an eigenvalue of order $(\log n)\per A$, but the dimension $f^\lambda$ in the denominator of the moments absorbs it.
+
+The second theorem lets the rank grow with $n$.
+\begin{theorem}\label{thm:growing}
+Let $d=d(n)\ge1$ and $\K\in\{\R,\C\}$.
+\begin{enumerate}
+\item If $d\log n=o(\sqrt n)$, then $M_2^\K(n,d)\to0$, and hence $M_1^\K(n,d)\to0$.
+\item If $d\log n=o(n)$, then $M_1^\K(n,d)\to0$.
+\end{enumerate}
+\end{theorem}
+
+For the standard representation alone, explicit bounds hold at every order and rank.
+\begin{theorem}\label{thm:standard}
+For all $n\ge2$ and $1\le d\le n$, and every Gram matrix $A$ of rank at most $d$ with positive diagonal,
+\[
+ m_1((n-1,1),A)\le\frac{6\sqrt{\mathrm e\,nd}-1}{n-1},\qquad
+ m_2((n-1,1),A)\le\frac{6\sqrt{\mathrm e\,nd}\,(\log n+5)-1}{n-1},
+\]
+and some real correlation matrix of rank $d$ gives $m_1=m_2=(d-1)/(n-1)$. Consequently $\sup_Am_1((n-1,1),A)\to0$ if and only if $d=o(n)$; $\sup_Am_2((n-1,1),A)\to0$ if $d(\log n)^2=o(n)$ and only if $d=o(n)$; and Lavi's inequality for the standard representation holds whenever $6\sqrt{\mathrm e\,nd}\,(\log n+5)\le n$.
+\end{theorem}
+The condition in the last sentence is explicit; for example, for $d=2$ it holds for all $n\ge10^5$ (in fact from $n=48\,836$ on).
+
+\subsection{Method and roadmap}
+Section~\ref{sec:prelim} collects the representation-theoretic facts: the blocks are positive semidefinite, they vanish for shapes with more than $d$ rows, and their traces are dominated by traces of \emph{ordered-partition matrices} $C_\alpha(A)$, whose entries are products of permanents of submatrices. It also derives a crude eigenvalue bound from the approximation theorem of Anari, Gurvits, Oveis Gharan and Saberi. Section~\ref{sec:exp} proves the analytic key: a strict inequality for the expected logarithm of a positive combination of independent exponential variables. Section~\ref{sec:trace} bounds $\Tr C_\alpha(A)/\per A$ by a Gaussian averaging argument, and proves the sharp constant $d-1$ for the first trace. Section~\ref{sec:fixed} proves Theorem~\ref{thm:main}, part 1: when two rows of $\lambda$ have lengths proportional to $n$, the dimension $f^\lambda$ grows exponentially faster than the squared trace bound; when the first row has length $n-o(n)$ but $\lambda$ is not the standard shape, polynomial factors suffice. Section~\ref{sec:standard} treats the standard shape: its sharp constants, and the exceptional real rank two. Section~\ref{sec:growing} proves Theorem~\ref{thm:growing} and Section~\ref{sec:threshold} proves Theorem~\ref{thm:standard}. Section~\ref{sec:remarks} discusses Chollet's inequality and open problems.
+
+\paragraph{Notation.} For Hermitian matrices, $X\preceq Y$ means that $Y-X$ is positive semidefinite. For a set $I\subseteq[n]$, $A[I]$ is the principal submatrix on $I$, and $\per A[\varnothing]=1$. $\gamma=0.5772\dots$ is Euler's constant and $\kappa=e^{1+\gamma}$. For integers $s\ge0$ and $d\ge1$ put
+\[
+ D_{s,d}=\binom{s+d-1}{d-1},
+\]
+the dimension of the space of homogeneous polynomials of degree $s$ in $d$ variables. A \emph{composition} $\alpha=(\alpha_1,\dots,\alpha_m)$ of $n$ is a list of nonnegative integers with sum $n$; its multinomial coefficient is $N_\alpha=n!/\prod_l\alpha_l!$. For a probability vector $p$, $H(p)=-\sum_ip_i\log p_i$ is its entropy, with $0\log0=0$. $\E$ denotes expectation; a \emph{standard complex Gaussian} has density $\pi^{-1}e^{-|z|^2}$ on $\C$, and a mean-one exponential variable has density $e^{-x}$ on $(0,\infty)$.
+
+\section{Preliminaries from representation theory}\label{sec:prelim}
+This section records the structural facts used throughout: positivity and vanishing of the blocks, the ordered-partition matrices that dominate their traces, Lieb's block inequality, a crude bound on all eigenvalues, and two dimension estimates.
+
+\paragraph{Gaussian integrals.} If $g$ is a standard complex Gaussian vector in $\C^d$ (independent standard coordinates), then for every $S\subseteq[n]$
+\begin{equation}\label{eq:wick}
+ \E\prod_{i\in S}|v_i^*g|^2=\per A[S].
+\end{equation}
+Indeed $\E[(v_i^*g)\overline{(v_j^*g)}]=v_i^*v_j=a_{ij}$, and the expectation of a product of $|S|$ such factors and their conjugates is the sum over pairings, which are indexed by permutations of $S$. Writing $g=Ru$ with $u$ uniform on the unit sphere of $\C^d$, independent of $R=\norm g$, and using $\E R^{2s}=d(d+1)\cdots(d+s-1)=s!\,D_{s,d}$,
+\begin{equation}\label{eq:sphere}
+ \E_u\prod_{i\in S}|v_i^*u|^2=\frac{\per A[S]}{|S|!\,D_{|S|,d}} .
+\end{equation}
+The variable $|g_1|^2$ is a mean-one exponential and $\E\log|g_1|^2=-\gamma$.
+
+\begin{lemma}\label{lem:blocks}
+Let $A$ be a Gram matrix of vectors in $\C^d$.
+\begin{enumerate}
+\item Each $B_\lambda(A)$ is positive semidefinite, and $\Tr B_\lambda(A)^2=\sum_{\sigma,\tau}\chi_\lambda(\sigma\tau)a_\sigma a_\tau$.
+\item If $\lambda$ has more than $d$ rows, then $B_\lambda(A)=0$. More generally the rank of $B_\lambda(A)$ is at most $s_\lambda(1^d)$, the number of semistandard tableaux of shape $\lambda$ with entries in $[d]$.
+\item If $d=1$, then $B_\lambda(A)=0$ for every $\lambda\ne(n)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Let $\Psi=v_1\otimes\cdots\otimes v_n\in(\C^d)^{\otimes n}$ and let $U_\sigma$ permute the tensor factors. The Schur power $\Pi(A)$ is the Gram matrix of the vectors $U_\sigma\Psi$, $\sigma\in S_n$ (with a suitable indexing convention), so $\Pi(A)=T^*T$ for the map $T:\C^{S_n}\to(\C^d)^{\otimes n}$ sending the basis vector of $\sigma$ to $U_\sigma\Psi$. Up to a unitary change of basis $\Pi(A)$ is the direct sum of the blocks $B_\lambda(A)$, each repeated $f^\lambda$ times, possibly after transposition or complex conjugation, which do not change spectra \cite[Lemma~2.2]{Lavi}. As $\Pi(A)\succeq0$, every block is positive semidefinite, and expanding the square of $B_\lambda$ and taking the trace gives the trace formula. The map $T$ intertwines the regular action of $S_n$ with its action on tensor factors, so it maps the $\lambda$-isotypic part of $\C^{S_n}$ into the $\lambda$-isotypic part of $(\C^d)^{\otimes n}$, which by Schur--Weyl duality has dimension $f^\lambda s_\lambda(1^d)$. The restriction of $\Pi(A)$ to the $\lambda$-isotypic part has rank $f^\lambda\operatorname{rank}B_\lambda(A)$ and is at most that of $T$ there; hence $\operatorname{rank}B_\lambda(A)\le s_\lambda(1^d)$. This number is zero when $\lambda$ has more than $d$ rows. Part~3 is the case $d=1$, in which only $\lambda=(n)$ has at most one row.
+\end{proof}
+
+\paragraph{Ordered-partition matrices.} For a composition $\alpha=(\alpha_1,\dots,\alpha_m)$ of $n$, let $\mathcal P_\alpha$ be the set of ordered set partitions $I=(I_1,\dots,I_m)$ of $[n]$ with $|I_l|=\alpha_l$, and define the $N_\alpha\times N_\alpha$ matrix
+\[
+ C_\alpha(A)_{I,J}=\prod_{l=1}^m\per A[I_l,J_l],
+ \qquad
+ \Tr C_\alpha(A)=\sum_{I\in\mathcal P_\alpha}\prod_l\per A[I_l].
+\]
+For two parts $(n-k,k)$ we write $C_k$; thus $C_1(A)=F_A$ is the matrix with entries $a_{ij}\per A(i,j)$, where $A(i,j)$ deletes row $i$ and column $j$, studied by Bapat and Sunder \cite{BS} and in \cite{EPBS}.
+
+\begin{lemma}\label{lem:young}
+Let $\lambda\vdash n$, and let $\alpha$ be any composition obtained by reordering the parts of $\lambda$.
+\begin{enumerate}
+\item $C_\alpha(A)$ is positive semidefinite, and $\Tr B_\lambda(A)\le\Tr C_\alpha(A)$.
+\item $C_1(A)=F_A$ is unitarily equivalent to $[\per A]\oplus B_{(n-1,1)}(A)$, the eigenvector of $\per A$ being the all-ones vector $\one$. Hence $\Tr B_{(n-1,1)}=\Tr F_A-\per A$ and $\Tr B_{(n-1,1)}^2=\Tr F_A^2-(\per A)^2$.
+\item Let $\mu\vdash k$ and $0\le k\le n$, and let $\lambda$ be obtained by adding to the diagram of $\mu$ a new first row of length $n-k\ge\mu_1$. Then
+\[
+ \Tr B_\lambda(A)\le\sum_{|I|=k}\per A[I^c]\,\Imm_\mu(A[I]).
+\]
+More generally, if $\lambda$ is obtained from $\mu$ by adding $J$ new rows on top, of lengths $\lambda_1\ge\dots\ge\lambda_J\ge\mu_1$, then $\Tr B_\lambda(A)\le\sum\prod_{l\le J}\per A[I_l]\,\Imm_\mu(A[I_*])$, the sum running over ordered set partitions $(I_1,\dots,I_J,I_*)$ with $|I_l|=\lambda_l$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+For any finite-dimensional unitary representation $\varrho$ of $S_n$, decompose $\varrho\cong\bigoplus_\nu\rho_\nu\otimes\C^{c_\nu}$ into irreducibles with multiplicities $c_\nu$. Then $X_\varrho=\sum_\sigma a_\sigma\varrho(\sigma^{-1})$ is unitarily equivalent to $\bigoplus_\nu B_\nu(A)\otimes I_{c_\nu}$, so it is positive semidefinite by Lemma~\ref{lem:blocks}, and $\Tr X_\varrho=\sum_\nu c_\nu\Tr B_\nu(A)\ge\Tr B_\lambda(A)$ whenever $c_\lambda\ge1$.
+
+Let $H\le S_n$ be the stabiliser of an ordered set partition of type $\alpha$ (a Young subgroup), let $\theta$ be a representation of $H$, and let $\varrho=\operatorname{Ind}_H^{S_n}\theta$. Its space is a direct sum of copies of the space of $\theta$, one fibre for each ordered set partition of type $\alpha$; a permutation maps fibres to fibres, and its trace is the sum, over the fibres it maps to themselves, of the character of $\theta$ at the permutation restricted to the parts. For $\theta$ trivial, $\varrho$ is the permutation module on $\mathcal P_\alpha$; the matrix of $X_\varrho$ in the basis $\mathcal P_\alpha$ has $(I,J)$ entry the sum of $a_\sigma$ over the permutations mapping each $I_l$ onto $J_l$ (or the reverse, depending on conventions), which is $\prod_l\per A[I_l,J_l]$. So $X_\varrho$ is $C_\alpha(A)$ up to transposition, and part~1 follows from Young's rule, which says that $\rho_\lambda$ occurs in this permutation module. Part~2 is the case $\alpha=(n-1,1)$: the permutation module on single points is the sum of the trivial and the standard representation, each once, and $F_A\one=(\per A)\one$ by expanding $\per A$ along a row. For part~3 take $\theta$ trivial on the symmetric groups of the first $J$ parts and $\rho_\mu$ on the last; the fixed fibres contribute $\prod_{l\le J}\per A[I_l]\,\Imm_\mu(A[I_*])$, and Pieri's rule, applied once for each added row, shows that $\rho_\lambda$ occurs in $\varrho$: adding on top of a diagram a row at least as long as its first row adds a horizontal strip.
+\end{proof}
+
+\paragraph{Lieb's inequality.} The following theorem of Lieb is used in the coefficient form proved by Djokovi\'c.
+\begin{theorem}[Lieb \cite{Lieb}; see \cite{Djokovic}]\label{thm:lieb}
+Let $A$ be positive semidefinite with no zero row, partitioned with a principal block $A_{11}$ on a set $E$ and complementary principal block $A_{22}$. If $A(t)$ is obtained by replacing $A_{11}$ by $tA_{11}$, then $\per A(t)$ is a polynomial in $t$ with nonnegative coefficients, and its coefficient of $t^{|E|}$ is $\per A_{11}\per A_{22}$.
+\end{theorem}
+The coefficient of $t^{|E|}$ collects the permutations that map $E$ to itself. Evaluating at $t=1$ gives $\per A[E]\per A[E^c]\le\per A$, and by induction
+\begin{equation}\label{eq:liebmulti}
+ \prod_{l}\per A[I_l]\le\per A\Bigl[\bigcup_lI_l\Bigr]
+\end{equation}
+for disjoint sets $I_l$. Zero rows make both sides vanish. Applied to singletons, $\per A\ge\prod_ia_{ii}>0$ when the diagonal is positive.
+
+\paragraph{A crude bound on all eigenvalues.} Anari, Gurvits, Oveis Gharan and Saberi define $\operatorname{rel}(A)=\inf\{\per D:D\text{ diagonal},\ D\succeq A\}$ and prove $\operatorname{rel}(A)\le\kappa^n\per A$ with $\kappa=e^{1+\gamma}$ \cite[Theorem~1 and eq.~(2)]{AGOS}. We need the following consequence.
+\begin{lemma}\label{lem:agos}
+For every positive semidefinite $A$ of order $k$ and every $\mu\vdash k$, every eigenvalue of $B_\mu(A)$ is at most $\kappa^k\per A$. Consequently $\Imm_\mu(A)\le f^\mu\kappa^k\per A$.
+\end{lemma}
+\begin{proof}
+The Schur power $\Pi(A)$ is the principal submatrix of $A^{\otimes k}$ on the index tuples $(\sigma(1),\dots,\sigma(k))$, $\sigma\in S_k$. If $D\succeq A$ is diagonal then $A^{\otimes k}\preceq D^{\otimes k}$, hence $\Pi(A)\preceq\Pi(D)=(\per D)I$, since $\prod_td_{\sigma(t)\tau(t)}$ vanishes unless $\sigma=\tau$. Taking the infimum over $D$ gives $\Pi(A)\preceq\operatorname{rel}(A)I\preceq\kappa^k(\per A)I$. Every eigenvalue of $B_\mu(A)$ is an eigenvalue of $\Pi(A)$ by the decomposition recalled in Section~\ref{sec:intro} \cite[Lemma~2.2]{Lavi}.
+\end{proof}
+
+\paragraph{Dimensions.} We use the hook formula: for $\lambda$ with at most $d$ rows (padded by zeros to exactly $d$ parts),
+\begin{equation}\label{eq:hook}
+ f^\lambda=\frac{n!\prod_{1\le i<j\le d}(\lambda_i-\lambda_j+j-i)}{\prod_{i=1}^d(\lambda_i+d-i)!}.
+\end{equation}
+\begin{lemma}\label{lem:dims}
+Let $\lambda\vdash n$ have at most $d$ rows.
+\begin{enumerate}
+\item $f^\lambda\le N_\lambda$ and $N_\lambda/f^\lambda\le\prod_{i=1}^d\binom{\lambda_i+d-i}{\lambda_i}\le\binom{n+d^2}{n}$; also $\prod_iD_{\lambda_i,d}\le\binom{n+d^2}{n}$.
+\item Write $\lambda=(n-k,\tau)$ with $\tau\vdash k$. If $k\le n/2$ then $f^\lambda\ge f^{(n-k,k)}f^\tau$, and $f^{(n-k,k)}=\binom nk\frac{n-2k+1}{n-k+1}$, which is at least $\frac12\binom nk$ when $k\le n/3$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+1. $f^\lambda\le N_\lambda$ because $\rho_\lambda$ occurs in the permutation module of dimension $N_\lambda$ (Young's rule). From \eqref{eq:hook} and $\prod_{i<j}(\lambda_i-\lambda_j+j-i)\ge\prod_{i<j}(j-i)=\prod_i(d-i)!$ we get $N_\lambda/f^\lambda\le\prod_i(\lambda_i+d-i)!/(\lambda_i!(d-i)!)$. Each binomial $\binom{\lambda_i+d-i}{\lambda_i}$, and each $D_{\lambda_i,d}$, counts lists of at most $d$ nonnegative integers with sum $\lambda_i$; the products count arrays of at most $d^2$ nonnegative integers with prescribed row sums, hence at most all arrays of $d^2$ nonnegative integers with total $n$, of which there are $\binom{n+d^2-1}{n}$.
+
+2. Take a standard tableau $T$ of two-row shape $(n-k,k)$, with lower row $b_1<\dots<b_k$, and a standard tableau $U$ of shape $\tau$. Keep the first row of $T$ and place $b_j$ in the cell of $\lambda$ below the first row that carries the label $j$ in $U$. Rows and columns below the first row increase because $U$ is standard and $j\mapsto b_j$ is increasing. The cell in column $c$ of the second row of $\lambda$ carries $b_j$ with $j\ge c$, since the $c$th entry of a row of $U$ is at least $c$; and $b_j\ge b_c$ exceeds the $c$th entry of the first row because $T$ is standard. So the result is a standard tableau of shape $\lambda$, from which $T$ and $U$ can be recovered. The formula for $f^{(n-k,k)}$ is the hook formula, and $(n-2k+1)/(n-k+1)\ge\frac12$ for $k\le n/3$.
+\end{proof}
+
+\section{An inequality for sums of exponential variables}\label{sec:exp}
+This section proves the analytic inequality that drives the argument: replacing two coefficients $a,b$ of independent exponential variables by the single coefficient $(a^{2/3}+b^{2/3})^{3/2}$ strictly increases the expected logarithm.
+
+For $t=(t_1,\dots,t_m)\in[0,\infty)^m\setminus\{0\}$ and independent mean-one exponential variables $E_1,\dots,E_m$ define
+\[
+ F_m(t)=\gamma+\E\log\Bigl(\sum_{i=1}^mt_iE_i\Bigr).
+\]
+The function is finite (compare with $\max_it_iE_i$ from below and $(\sum_it_i)\sum_iE_i$ from above), symmetric, concave, and continuous on its domain by dominated convergence; $F_1(t)=\log t$, and zero coordinates may be dropped. Convolving the two exponential densities gives, for $a\ne b$ positive,
+\begin{equation}\label{eq:F2}
+ F_2(a,b)=\frac{a\log a-b\log b}{a-b},\qquad\text{in particular}\qquad F_2(1,t)=\frac{t\log(1/t)}{1-t},
+\end{equation}
+with the continuous extension at $a=b$ (for example $F_2(1,1)=1$).
+
+\begin{lemma}\label{lem:merge}
+Let $a,b>0$, $s=(a^{2/3}+b^{2/3})^{3/2}$, and let $X,Y,Z$ be independent mean-one exponentials. For every $c\ge0$,
+\begin{equation}\label{eq:merge}
+ \E\log(c+aX+bY)<\E\log(c+sZ).
+\end{equation}
+Consequently, for $t\in[0,\infty)^m$ with at least two positive coordinates,
+\[
+ F_m(t)<\tfrac32\log\Bigl(\sum_it_i^{2/3}\Bigr),
+\]
+and if the coordinates of $t$ are split into two classes with sums of $t_i^{2/3}$ equal to $\Sigma_1$ and $\Sigma_2$, then $F_m(t)\le F_2(\Sigma_1^{3/2},\Sigma_2^{3/2})$.
+\end{lemma}
+\begin{proof}
+\emph{The case $c=0$.} Write $a=\sigma e^x$ and $b=\sigma e^{-x}$ with $\sigma>0$ and $x\ge0$. By \eqref{eq:F2}, $\gamma+\E\log(aX+bY)=\log\sigma+x\coth x$, while $\gamma+\E\log(sZ)=\log s=\log\sigma+\frac32\log(2\cosh(2x/3))$. So \eqref{eq:merge} at $c=0$ says $\omega(x)>0$, where $\omega(x)=\frac32\log(2\cosh(2x/3))-x\coth x$ (with $x\coth x=1$ at $x=0$). We have $\omega(0)=\frac32\log2-1>0$ and $\omega(x)\to0$ as $x\to\infty$, so it suffices that $\omega'<0$ on $(0,\infty)$, that is $\coth x-x/\sinh^2x>\tanh(2x/3)$. With $z=2x/3$, a direct computation gives the identity $2\sinh^2x\,\bigl(\coth x-x/\sinh^2x-\tanh z\bigr)=2\sinh z+\tanh z-3z$, so it suffices that $2\sinh z+\tanh z>3z$ for $z>0$. The difference $2\sinh z+\tanh z-3z$ vanishes at $0$ and has derivative $2\cosh z+\cosh^{-2}z-3=(\cosh z-1)^2(2\cosh z+1)/\cosh^2z>0$.
+
+\emph{The case $c>0$.} From $\log y=\int_0^\infty(e^{-u}-e^{-yu})\,du/u$ and $\E e^{-uaX}=(1+au)^{-1}$,
+\[
+ \E\log(c+aX+bY)-\E\log(c+sZ)=\int_0^\infty e^{-cu}\,g(u)\,du,\qquad
+ g(u)=\frac{a+b-s+ab\,u}{(1+su)(1+au)(1+bu)}.
+\]
+The integral converges also for $c=0$, where it is negative by the first case. Since $s>a+b$ (the map $y\mapsto y^{3/2}$ is strictly superadditive), $g$ is negative on $(0,u_0)$ and positive on $(u_0,\infty)$ for $u_0=(s-a-b)/(ab)$. Hence $\int e^{-cu}g\le e^{-cu_0}\int g<0$, because $e^{-cu}\ge e^{-cu_0}$ where $g<0$ and $e^{-cu}\le e^{-cu_0}$ where $g>0$.
+
+\emph{Consequences.} In $F_m(t)$, condition on all exponentials except those attached to two positive coordinates $t_i,t_j$, and apply \eqref{eq:merge} with $c$ equal to the remaining sum: replacing $(t_i,t_j)$ by the single coefficient $(t_i^{2/3}+t_j^{2/3})^{3/2}$ strictly increases $F$ and preserves $\sum t^{2/3}$. Iterating leaves a single coefficient $(\sum_it_i^{2/3})^{3/2}$, for which $F_1=\frac32\log\sum_it_i^{2/3}$. Merging only within each class leaves two coefficients $\Sigma_1^{3/2}$ and $\Sigma_2^{3/2}$.
+\end{proof}
+
+We also need the behaviour of $F_m$ when one coefficient dominates.
+\begin{lemma}\label{lem:small}
+For $t_1,\dots,t_r\ge0$ with $s=\sum_it_i\le1$,
+\[
+ F_{r+1}(1,t_1,\dots,t_r)\le\E\log\Bigl(1+\frac s{E}\Bigr)=\int_0^\infty e^{-u}\log\Bigl(1+\frac su\Bigr)du\le3s\log\frac es,
+\]
+where $E$ is a mean-one exponential.
+\end{lemma}
+\begin{proof}
+Condition on the first exponential $E$ and apply Jensen's inequality to the concave logarithm in the others: $\E\log(E+\sum_it_iE_i)\le\E\log(E+s)$. Subtract $\E\log E=-\gamma$. For the last inequality split the integral at $s$ and $1$: on $(0,s)$ use $\log(1+s/u)\le\log(2s/u)$, whose integral is $s(1+\log2)$; on $(s,1)$ use $\log(1+s/u)\le s/u$; on $(1,\infty)$ use $\log(1+s/u)\le s$.
+\end{proof}
+
+\section{Trace bounds for ordered-partition matrices}\label{sec:trace}
+This section bounds $\Tr C_\alpha(A)/\per A$ for every composition $\alpha$, and then proves the sharp constant $d-1$ in the first trace bound $\Tr F_A/\per A\lesssim(d-1)\log n$.
+
+\begin{lemma}\label{lem:trace}
+Let $A$ be the Gram matrix of $v_1,\dots,v_n\in\C^d$, not all zero, let $\alpha=(\alpha_1,\dots,\alpha_m)$ be a composition of $n$ and let $t\in(0,\infty)^m$. Then
+\[
+ \frac{\Tr C_\alpha(A)}{\per A}\le
+ \frac{\prod_{l=1}^mD_{\alpha_l,d}}{D_{n,d}\,N_\alpha}\;e^{nF_m(t)}\prod_{l=1}^mt_l^{-\alpha_l}.
+\]
+\end{lemma}
+\begin{proof}
+Let $u_1,\dots,u_m$ be independent uniform unit vectors in $\C^d$ (the \emph{probes}) and consider the polynomial
+\[
+ \mathcal Q(t)=\E_{u}\prod_{j=1}^n\Bigl(\sum_{l=1}^mt_l|u_l^*v_j|^2\Bigr).
+\]
+Expanding the product, a monomial $\prod_lt_l^{\alpha_l}$ arises by assigning each $j$ to a probe, that is from an ordered set partition $I\in\mathcal P_\alpha$, with coefficient $\prod_l\E\prod_{j\in I_l}|u_l^*v_j|^2$. By \eqref{eq:sphere} the coefficient of $\prod_lt_l^{\alpha_l}$ in $\mathcal Q$ is therefore $\Tr C_\alpha(A)/\prod_l(\alpha_l!\,D_{\alpha_l,d})$, and all coefficients are nonnegative. It remains to show $\mathcal Q(t)\le e^{nF_m(t)}\per A/(n!\,D_{n,d})$.
+
+Fix the probes, let $g_1,\dots,g_m$ be independent standard complex Gaussians and put $Y=\sum_l\sqrt{t_l}\,g_lu_l$. Each $v_j^*Y$ is a centred complex Gaussian with variance $\sum_lt_l|u_l^*v_j|^2$, so $\E_g\log|v_j^*Y|^2=\log\sum_lt_l|u_l^*v_j|^2-\gamma$. Summing over $j$ and writing $Y=\norm Y\hat Y$,
+\[
+ \prod_j\sum_lt_l|u_l^*v_j|^2
+ =\exp\Bigl(n\gamma+n\E_g\log\norm Y^2+\E_g\log\prod_j|v_j^*\hat Y|^2\Bigr)
+ \le e^{n\gamma+n\E_g\log\norm Y^2}\;\E_g\prod_j|v_j^*\hat Y|^2,
+\]
+by Jensen's inequality for the exponential; if the left side is zero there is nothing to prove. Now $\norm Y^2=g^*Gg$, where $G$ is the Gram matrix of the vectors $\sqrt{t_l}u_l$, so $\norm Y^2$ has the law of $\sum_l\eta_lE_l$, where $\eta$ is the eigenvalue vector of $G$ and the $E_l$ are independent mean-one exponentials. The diagonal of $G$ is $t$, so by the Schur--Horn theorem $\eta$ majorises $t$; since $\eta\mapsto\E\log\sum_l\eta_lE_l$ is symmetric and concave, it is Schur-concave, and $\gamma+\E_g\log\norm Y^2\le F_m(t)$. Finally average over the probes. The joint law of $(u_1,\dots,u_m,g)$ is invariant under applying one unitary to all probes, which rotates $\hat Y$; hence $\hat Y$ is uniform on the sphere and, by \eqref{eq:sphere}, $\E\prod_j|v_j^*\hat Y|^2=\per A/(n!\,D_{n,d})$.
+\end{proof}
+
+For two parts $\alpha=(n-k,k)$ and weights $(1,t)$, Lemma~\ref{lem:trace} and \eqref{eq:F2} give
+\begin{equation}\label{eq:twocolour}
+ \frac{\Tr C_k(A)}{\per A}\le\frac{D_{k,d}D_{n-k,d}}{D_{n,d}\binom nk}\,t^{-k}\exp\Bigl(\frac{nt\log(1/t)}{1-t}\Bigr)\qquad(t>0).
+\end{equation}
+\begin{corollary}\label{cor:Ck}
+Fix $d$.
+\begin{enumerate}
+\item For each fixed $k\ge1$, $\sup_A\Tr C_k(A)/\per A\le(1+o(1))\,D_{k,d}\,k!\,(e/k)^k(\log n)^k$.
+\item If $k\to\infty$ and $k=o(n)$, then $\frac1k\log\sup_A\Tr C_k(A)/\per A\le\log\log(n/k)+o(1)$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+Use $D_{n-k,d}\le D_{n,d}$. For fixed $k$ take $t=k/(n\log n)$; then $nt\log(1/t)/(1-t)=k+o(1)$, and $t^{-k}/\binom nk=(1+o(1))(\log n)^kk!/k^k$. For growing $k$ take $t=k/(nL)$ with $L=\log(n/k)\to\infty$; then $nt\log(1/t)/(1-t)=k(1+o(1))$, $\log\binom nk=k\log(n/k)+k+o(k)$ by Stirling's formula, and $\log D_{k,d}=O_d(\log k)=o(k)$.
+\end{proof}
+
+The constant in the first case is not sharp for $k=1$. The next result gives the sharp constant; its proof keeps track of the overlap between the two probes instead of using majorisation.
+\begin{proposition}\label{prop:trace1}
+For each fixed $d\ge1$,
+\[
+ \limsup_{n\to\infty}\ \sup_A\frac{\Tr F_A}{\per A\,\log n}\le d-1,
+\]
+the supremum being over Gram matrices of $n$ vectors in $\C^d$ with positive diagonal.
+\end{proposition}
+\begin{proof}
+Let $z,y$ be independent uniform unit vectors in $\C^d$, $\varphi=|z^*y|^2$, and let $g_1,g_2$ be independent standard complex Gaussians, independent of $z,y$. For $t>0$ put $Y=g_1z+\sqrt t\,g_2y$. As in the proof of Lemma~\ref{lem:trace}, for fixed $z,y$,
+\[
+ \prod_j\bigl(|v_j^*z|^2+t|v_j^*y|^2\bigr)\le e^{n\Lambda_\varphi(t)}\,\E_g\prod_j|v_j^*\hat Y|^2,
+ \qquad \Lambda_\varphi(t)=\gamma+\E_g\log\norm Y^2 .
+\]
+The Gram matrix of $(z,\sqrt t\,y)$ has eigenvalues $\eta_\pm=\frac12\bigl(1+t\pm\sqrt{(1-t)^2+4t\varphi}\bigr)$, so $\norm Y^2$ has the law of $\eta_+E_1+\eta_-E_2$ and $\Lambda_\varphi(t)=\log\eta_++F_2(1,\eta_-/\eta_+)$. The joint law of $(z,y,g)$ is invariant under a common unitary, which fixes $\varphi$ and rotates $\hat Y$; so conditionally on $\varphi$ the direction $\hat Y$ is uniform, and averaging gives
+\[
+ \E_{z,y}\prod_j\bigl(|v_j^*z|^2+t|v_j^*y|^2\bigr)\le\E_\varphi\bigl[e^{n\Lambda_\varphi(t)}\bigr]\frac{\per A}{n!\,D_{n,d}} .
+\]
+By \eqref{eq:sphere} the left side is $\sum_kt^k\Tr C_k(A)/(k!(n-k)!D_{k,d}D_{n-k,d})$, with constant term $\per A/(n!D_{n,d})$ and linear coefficient $\Tr F_A/((n-1)!\,d\,D_{n-1,d})$. Dropping the higher (nonnegative) terms and using $D_{n-1,d}/D_{n,d}=n/(n+d-1)$,
+\begin{equation}\label{eq:trace1}
+ \frac{\Tr F_A}{\per A}\le\frac d{n+d-1}\cdot\frac{\E_\varphi e^{n\Lambda_\varphi(t)}-1}t .
+\end{equation}
+Now $\eta_+=1+O(t)$ and $\eta_+\eta_-=t(1-\varphi)$ uniformly in $\varphi\in[0,1]$, and $F_2(1,x)=x\log(1/x)+O(x)$ for $0<x\le\frac12$. Hence $\Lambda_\varphi(t)=t(1-\varphi)\log(1/t)+O(t)$ uniformly in $\varphi$ (using that $(1-\varphi)\log\frac1{1-\varphi}\le e^{-1}$). Take $t=\beta/(n\log n)$ with fixed $\beta>0$. Then $n\Lambda_\varphi(t)\to\beta(1-\varphi)$ uniformly, and \eqref{eq:trace1} gives
+\[
+ \limsup_{n\to\infty}\sup_A\frac{\Tr F_A}{\per A\,\log n}\le d\cdot\frac{\E e^{\beta(1-\varphi)}-1}\beta .
+\]
+Letting $\beta\downarrow0$ gives $d\,\E(1-\varphi)=d-1$, because $\E\,yy^*=I/d$ gives $\E\varphi=1/d$.
+\end{proof}
+
+\section{Fixed rank: all shapes other than the standard one}\label{sec:fixed}
+This section proves part~1 of Theorem~\ref{thm:main} apart from the standard shape: at fixed rank, both moments tend to zero uniformly, and they are $o(1/n)$ uniformly over shapes with $n-\lambda_1\ge2$.
+
+Fix $d$. By Lemma~\ref{lem:blocks} only shapes with at most $d$ rows matter. By Lemma~\ref{lem:young} and positivity,
+\begin{equation}\label{eq:momentbounds}
+ m_1(\lambda,A)\le\frac{\Tr C_\lambda(A)}{f^\lambda\per A},\qquad
+ m_2(\lambda,A)\le\frac{(\Tr B_\lambda)^2}{f^\lambda(\per A)^2}\le\frac{1}{f^\lambda}\Bigl(\frac{\Tr C_\lambda(A)}{\per A}\Bigr)^2 .
+\end{equation}
+Suppose the conclusion fails. Then there are $\epsilon>0$, a sequence $n\to\infty$, shapes $\lambda^{(n)}$ and inputs $A^{(n)}$ violating the bound by $\epsilon$. Passing to a subsequence we may assume $\lambda_i^{(n)}/n\to p_i$ for $i\le d$, and that one of the following holds: (a) at least two $p_i$ are positive; (b) $p_1=1$ and $k=n-\lambda_1\to\infty$; (c) $p_1=1$ and $k=n-\lambda_1$ is a constant $k\ge1$. If $p_1<1$ then, as $\sum_ip_i=1$ with at most $d$ terms, case (a) holds. We show that the moments tend to zero exponentially in case (a), and faster than every power of $n$ in case (b), and are $O((\log n)^{2k}/n^k)$ in case (c). For $k\ge2$ all of these are $o(1/n)$, a contradiction; the case $k=1$ is the standard shape, treated in Section~\ref{sec:standard}.
+
+\paragraph{Case (a): two rows of linear length.} By \eqref{eq:hook} and Stirling's formula, at fixed $d$ both $f^\lambda$ and $N_\lambda$ equal $e^{nH(p)+o(n)}$. Fix $\epsilon'>0$ and apply Lemma~\ref{lem:trace} with $\alpha=\lambda$ and $t_i=\max(p_i,\epsilon')^{3/2}$. Since $\prod_iD_{\lambda_i,d}\le(n+1)^{d^2}$,
+\[
+ \limsup\frac1n\log\frac{\Tr C_\lambda}{\per A}\le-H(p)+F_d(t)-\sum_ip_i\log t_i
+ =-H(p)+F_d(t)+\tfrac32H(p)+o_{\epsilon'}(1),
+\]
+where the error term tends to zero as $\epsilon'\downarrow0$, uniformly in the inputs. By continuity of $F_d$, letting $\epsilon'\downarrow0$ gives the exponent $F_d(p^{3/2})+\frac12H(p)$, and Lemma~\ref{lem:merge} with $\sum_ip_i=1$ gives $F_d(p^{3/2})<0$. By \eqref{eq:momentbounds}, $\limsup\frac1n\log m_2\le2F_d(p^{3/2})<0$ and $\limsup\frac1n\log m_1\le F_d(p^{3/2})-\frac12H(p)<0$.
+
+\paragraph{Cases (b) and (c): a long first row.} Write $\lambda=(n-k,\tau)$ with $\tau\vdash k$ having at most $d-1$ rows. In $\Tr C_\lambda=\sum\per A[I_1]\prod_{l\ge2}\per A[I_l]$, inequality \eqref{eq:liebmulti} bounds $\prod_{l\ge2}\per A[I_l]$ by $\per A[I]$, where $I=\bigcup_{l\ge2}I_l$, and each $k$-set $I$ splits into the parts $I_2,I_3,\dots$ in at most $(d-1)^k$ ways. Hence
+\[
+ \Tr C_\lambda(A)\le(d-1)^k\,\Tr C_k(A).
+\]
+By Lemma~\ref{lem:dims}, $f^\lambda\ge\frac12\binom nk\ge\frac12(n/k)^k$ once $k\le n/3$. In case (c), Corollary~\ref{cor:Ck} and \eqref{eq:momentbounds} give $m_2=O_{k,d}((\log n)^{2k}/n^k)$ and $m_1=O_{k,d}((\log n)^k/n^k)$. In case (b), Corollary~\ref{cor:Ck} gives
+\[
+ \log m_2\le2k\log\log(n/k)+O_d(k)-\log\binom nk\le-(1-o(1))\,k\log(n/k),
+\]
+and the same bound holds for $m_1$. Finally $k\log(n/k)/\log n\to\infty$: if $k\le\sqrt n$ the ratio is at least $k/2$, and if $k>\sqrt n$ it is at least $\sqrt n\log(n/k)/\log n$ with $n/k\to\infty$. So both moments decay faster than every power of $n$.
+
+\section{The standard shape}\label{sec:standard}
+This section completes Theorem~\ref{thm:main}. It determines the moments of the standard shape at fixed rank: the upper bounds come from Proposition~\ref{prop:trace1} and the sharp Bapat--Sunder bound \cite{EPBS}, and the matching lower bound at complex rank $d$ comes from a frame that places $d-1$ large eigenvalues in orthogonal directions. Real rank two is exceptional.
+
+By Lemma~\ref{lem:young}(2), with $B_\std=B_{(n-1,1)}$,
+\begin{equation}\label{eq:stdmoments}
+ m_1((n-1,1),A)=\frac{\Tr F_A-\per A}{(n-1)\per A},\qquad
+ m_2((n-1,1),A)=\frac{\Tr F_A^2-(\per A)^2}{(n-1)(\per A)^2}.
+\end{equation}
+
+\paragraph{Upper bounds.} For every positive semidefinite $A$ of order $n$ with positive diagonal, $\lambda_{\max}(F_A)\le(\log n+5)\per A$, and $\lambda_{\max}(F_A)\le(\frac12\log n+\frac52)\per A$ if $A$ is real \cite[Proposition~2.4]{EPBS}. As $F_A\succeq0$, $\Tr F_A^2\le\lambda_{\max}(F_A)\Tr F_A$. With Proposition~\ref{prop:trace1}, at fixed rank $d$ over either field,
+\[
+ m_1((n-1,1),A)\le(d-1+o(1))\frac{\log n}n,\qquad m_2((n-1,1),A)\le(d-1+o(1))\frac{(\log n)^2}n
+\]
+uniformly in $A$.
+
+\paragraph{Lower bounds over the reals, $d\ge3$.} By \cite[Theorem~1.1]{EPBS} there are real correlation matrices of rank three and every large order $n$ with $\lambda_{\max}(F_A)\ge(\frac12\log n-C_0\log\log n)\per A$ for an absolute constant $C_0$. Once this exceeds $\per A$, the top eigenvalue belongs to $B_\std$, so $\Tr B_\std\ge\lambda_{\max}(F_A)$ and $\Tr B_\std^2\ge\lambda_{\max}(F_A)^2$. Hence $M_1^\R(n,d)\ge(\frac12-o(1))(\log n)/n$ and $M_2^\R(n,d)\ge(\frac14-o(1))(\log n)^2/n$ for $d\ge3$ (a rank-three frame is also a frame of rank at most $d$).
+
+\paragraph{Lower bounds over the complex numbers.} We extend the complex rank-two construction of \cite{EPBS} to $h=d-1$ orthogonal directions. We use the \emph{factorial inner product} on polynomials in $z=(z_1,\dots,z_d)$, in which distinct monomials are orthogonal and $\norm{z^\beta}^2=\beta!=\prod_i\beta_i!$. To a vector $v\in\C^d$ attach the linear form $\ell(z)=v^{\mathsf T}z$. For a Gram matrix of $v_1,\dots,v_n$ and $x\in\C^n$, put $P=\prod_i\ell_i$ and $Q_q=\sum_ix_iv_{iq}\prod_{j\ne i}\ell_j$ for $1\le q\le d$, where $v_{iq}$ is the $q$th coordinate of $v_i$. Then
+\begin{equation}\label{eq:fock}
+ \per A=\norm P^2,\qquad x^*F_Ax=\sum_{q=1}^d\norm{Q_q}^2
+\end{equation}
+\cite[Lemma~3.1]{EPBS}. Both sides of every ratio below scale in the same way under $v_i\mapsto c_iv_i$, so the vectors need not be normalised.
+
+\emph{Circles of roots.} Fix $\varrho>1$, put $\varpi(\varrho)=-\log(1-\varrho^{-1})+\log\varrho/(\varrho-1)$, and fix $a$ with $\vartheta=1+\log a-\varpi(\varrho)>0$. Choose an integer $K\ge3$ and put $k_1=K$, $k_{i+1}=\lceil\varrho k_i\rceil$. On circle $i$ place the $k_i$ numbers $\sqrt{ak_i}\,\zeta$ with $\zeta^{k_i}=1$. Let $c_1,\dots,c_S$ be the numbers on the first $L$ circles, $S=k_1+\dots+k_L$, and $p_L(w)=\prod_{j=1}^S(1+w/c_j)$, with the one-variable factorial norm $\norm{w^e}^2=e!$.
+\begin{lemma}\label{lem:circles}
+For every $\epsilon>0$ there is $K_0(\varrho,a,\epsilon)$ such that $\norm{p_L}\le1+\epsilon$ for all $K\ge K_0$ and all $L$.
+\end{lemma}
+\begin{proof}
+The factor of circle $i$ is $\prod_\zeta(1+w\zeta^{-1}/\sqrt{ak_i})=1-(-w/\sqrt{ak_i})^{k_i}$. Expanding $p_L$, a nonempty set $\mathcal J$ of circles contributes a monomial $\pm w^T/\prod_{i\in\mathcal J}(ak_i)^{k_i/2}$ with $T=\sum_{i\in\mathcal J}k_i$, of squared norm $W_{\mathcal J}^2=T!/\prod_{i\in\mathcal J}(ak_i)^{k_i}$. Let $q_0\ge q_1\ge\cdots$ be the weights $k_i/T$, $i\in\mathcal J$. Since $k_{i'}\ge\varrho^{i'-i}k_i$ for $i'>i$, $q_{j+e}\le\varrho^{-e}q_j$, so $\sum_{j\ge e}q_j\le\varrho^{-e}$ and $\sum_jjq_j\le1/(\varrho-1)$. Nonnegativity of the relative entropy of $(q_j)$ with respect to the geometric law $(1-\varrho^{-1})\varrho^{-j}$ gives $-\sum_jq_j\log q_j\le\varpi(\varrho)$. With $T!\le e\sqrt T(T/e)^T$ this yields $W_{\mathcal J}^2\le e\sqrt T\,e^{-\vartheta T}\le e^{-\vartheta T/2}$ once $T\ge K\ge K_1(\vartheta)$. By the triangle inequality,
+\[
+ \norm{p_L}\le\sum_{\mathcal J}W_{\mathcal J}\le\prod_{i\ge1}\bigl(1+e^{-\vartheta k_i/4}\bigr)\le\exp\Bigl(\sum_{i\ge1}e^{-\vartheta K\varrho^{i-1}/4}\Bigr),
+\]
+which is at most $1+\epsilon$ for $K$ large, uniformly in $L$. (Different sets $\mathcal J$ may give the same degree $T$; the triangle inequality covers this.)
+\end{proof}
+
+\emph{The frame.} Write the coordinates of $\C^d$ as $(u,w_1,\dots,w_h)$. Let $n$ be large, let $L$ be the largest integer with $hS(1+\log(hS))\le n$, and put $M=n-hS$. Take $M$ copies of the first coordinate vector (linear form $u$) and, for each $b=1,\dots,h$ and $j=1,\dots,S$, the vector with linear form $c_ju/\sqrt M+w_b$. These $n$ vectors span $\C^d$. Since $K\varrho^{i-1}\le k_i\le(K+1/(\varrho-1))\varrho^{i-1}$, maximality of $L$ gives $L\log\varrho=\log n-O(\log\log n)$ and $M/n\to1$, for fixed $\varrho,a,K,h$.
+
+Dividing all forms of group $b$ by the factor $c_j$ multiplies $P$ and every $Q_q$ by the same scalar $\prod_jc_j^{-h}$, so we may compute with the scaled forms $u/\sqrt M+w_b/c_j$. The scaled product is $u^M\prod_{b=1}^hp^{\hom}(u,w_b)$, where $p^{\hom}(u,w)=\prod_j(u/\sqrt M+w/c_j)$; its coefficient of $u^{n-|\beta|}w_1^{\beta_1}\cdots w_h^{\beta_h}$ is $M^{-(hS-|\beta|)/2}\prod_b[w^{\beta_b}]p_L$. With $K_M=n!/M^{hS}$,
+\[
+ \Delta:=\frac{\norm{\text{scaled }P}^2}{K_M}=\sum_{0\le\beta_b\le S}\frac{M^{|\beta|}(n-|\beta|)!}{n!}\prod_{b=1}^h\beta_b!\,\bigl|[w^{\beta_b}]p_L\bigr|^2\le\norm{p_L}^{2h},
+\]
+because $|\beta|\le hS=n-M$ makes the prefactor at most one.
+
+\emph{Test vectors.} For $l=(l_1,\dots,l_h)\in\C^h$ let $x$ be zero on the $M$ carrier indices and $x_{bj}=l_b/\overline{c_j}$ on the vector $(b,j)$. On each circle $\sum_\zeta\overline{\zeta}^{-1}=0$, so $x\perp\one$; and $\norm x^2=\sum_b|l_b|^2\sum_j|c_j|^{-2}=(L/a)\norm l^2$. The coordinate $w_b$ appears only in the forms of group $b$; in the scaled form $(b,j)$ its coefficient is $1/c_j$, so the scaled $Q_{w_b}$ is $\sum_j(x_{bj}/c_j)$ times the scaled product with the factor $(b,j)$ removed. Its coefficient of $u^{n-1}$ is $M^{-(hS-1)/2}\sum_jx_{bj}/c_j=M^{-(hS-1)/2}(L/a)\,l_b$. Keeping only these $h$ monomials in \eqref{eq:fock} and using $(n-1)!M^{-(hS-1)}/K_M=M/n$,
+\[
+ \frac{x^*F_Ax}{\per A\,\norm x^2}\ge\frac{(M/n)(L/a)^2\norm l^2}{\Delta\,(L/a)\norm l^2}\ge\frac Mn\cdot\frac{L}{a\norm{p_L}^{2h}} .
+\]
+These test vectors form an $h$-dimensional subspace of $\one^\perp$, on which $F_A$ acts as $B_\std$. By the min--max principle, $B_\std$ has $h$ eigenvalues at least $(M/n)L\per A/(a\norm{p_L}^{2h})$, and therefore
+\[
+ \Tr B_\std\ge h\,\frac{(1-o(1))\log n}{a\log\varrho\,(1+\epsilon)^{2h}}\per A,\qquad
+ \Tr B_\std^2\ge h\Bigl(\frac{(1-o(1))\log n}{a\log\varrho\,(1+\epsilon)^{2h}}\Bigr)^2(\per A)^2 .
+\]
+Finally $a\log\varrho$ can be made arbitrarily close to one: as $a\downarrow e^{\varpi(\varrho)-1}$, $a\log\varrho\to\frac{\varrho\log\varrho}{\varrho-1}\exp\bigl(\frac{\log\varrho}{\varrho-1}-1\bigr)$, which tends to one as $\varrho\downarrow1$ (see also \cite[Section~6]{EPBS}). Letting $n\to\infty$, then $\epsilon\downarrow0$, $a\downarrow e^{\varpi(\varrho)-1}$ and $\varrho\downarrow1$, and using \eqref{eq:stdmoments},
+\[
+ \liminf_{n\to\infty}\frac{n\,M_1^\C(n,d)}{\log n}\ge d-1,\qquad
+ \liminf_{n\to\infty}\frac{n\,M_2^\C(n,d)}{(\log n)^2}\ge d-1 .
+\]
+Together with the upper bounds this proves the complex asymptotics in Theorem~\ref{thm:main}(3).
+
+\paragraph{Real rank two.} At real rank two, $\Pi(A)\preceq(\per A)I$ \cite{Liq}, \cite[Appendix~A]{EPBS}, so $\lambda_{\max}(F_A)\le\per A$. We show $\Tr F_A\le4\per A$ for every real Gram matrix of rank at most two; with \eqref{eq:stdmoments} this gives $m_1,m_2\le3/(n-1)$ for the standard shape.
+
+Fix a unit vector $e\in\R^2$ and a unit vector $e'\perp e$, and write $v_i=x_ie+y_ie'$ with $x_i,y_i$ real. By \eqref{eq:wick} with independent standard complex Gaussians $g,g'$ in the coordinates $e,e'$, $\per A=\E|\prod_i(x_ig+y_ig')|^2$ and $\sum_ix_i^2\per A(i,i)=\E\sum_ix_i^2\prod_{j\ne i}|x_jg+y_jg'|^2$. Condition on $g'$ and multiply $g$ and $g'$ by a common phase that makes $g'$ real; this preserves all moduli and leaves the conditional law of $g$ standard. Apart from a common factor, $\prod_j(x_jg+y_jg')$ is then a polynomial $\pi(g)=\prod_{j:x_j\ne0}(g-\theta_j)$ with real roots $\theta_j=-y_jg'/x_j$, and the $i$th term is that factor squared times $|\pi(g)/(g-\theta_i)|^2$ when $x_i\ne0$ and zero otherwise. For $g=\xi+\mathrm i\zeta$ put $\Omega(\zeta^2)=|\pi(\xi+\mathrm i\zeta)|^2=\prod_j((\xi-\theta_j)^2+\zeta^2)$, a polynomial in $\zeta^2$ with nonnegative coefficients; then $\sum_j|\pi(g)/(g-\theta_j)|^2=\Omega'(\zeta^2)$, including repeated roots. The real and imaginary parts of $g$ are independent with density proportional to $e^{-\zeta^2}$, and $\E\,j\zeta^{2j-2}=\frac{j}{j-1/2}\E\,\zeta^{2j}\le2\,\E\,\zeta^{2j}$ for $j\ge1$. So $\E_\zeta\Omega'(\zeta^2)\le2\E_\zeta\Omega(\zeta^2)$ for every $\xi$ and $g'$, and integrating,
+\[
+ \sum_ix_i^2\per A(i,i)\le2\per A .
+\]
+Adding the same inequality for $e'$ in place of $e$ gives $\Tr F_A=\sum_i\norm{v_i}^2\per A(i,i)\le4\per A$. For the lower bound take the direct sum $J_a\oplus J_{n-a}$ of two all-ones blocks, $1\le a<n$, the Gram matrix of $a$ copies of $e$ and $n-a$ copies of $e'$. Then $F_A/\per A=\frac1aJ_a\oplus\frac1{n-a}J_{n-a}$ is the orthogonal projection onto the two block-constant vectors, and both standard moments equal $1/(n-1)$.
+
+\paragraph{Proof of Theorem~\ref{thm:main}.} Part~1 is Section~\ref{sec:fixed} together with the bound $m_j((n-1,1),A)=O((\log n)^j/n)$ just proved. For part~2: over $\C$ with $d\ge2$ and over $\R$ with $d\ge3$, the standard shape reaches order $(\log n)^j/n$, while all other nontrivial shapes are $o(1/n)$; at real rank two it reaches $1/(n-1)$, again larger than $o(1/n)$. Part~3 collects the bounds of this section; at real rank two, part~2 identifies $M_j^\R(n,2)$ with the standard supremum for large $n$. \qed
+
+\section{Rank growing with the order}\label{sec:growing}
+This section proves Theorem~\ref{thm:growing}. The fixed-rank argument used compactness in the number of rows; here the number of rows may grow, so the estimates are made uniform in $d$. Throughout, $c_0$ denotes an absolute constant whose value may change between occurrences, and real frames are regarded as complex.
+
+\subsection{The quadratic moment: proof of part 1}
+Assume $d\log n=o(\sqrt n)$. We may suppose $\lambda$ has at most $d$ rows and write $\lambda=(n-k,\tau)$ with $\tau\vdash k$ having $\ell\le\min(d-1,k)$ rows, $k\ge1$.
+
+\emph{Short tails, $k\le n/3$.} Put $\Lambda=\log(en/k)$ and apply Lemma~\ref{lem:trace} to $\alpha=\lambda$ with weights $1$ for the first row and $t_i=\tau_i/(n\Lambda)$ for the others. Then $s=\sum_it_i=k/(n\Lambda)\le1$, and Lemma~\ref{lem:small} gives $nF(1,t)\le3ns\log(e/s)=3(k/\Lambda)\log(en\Lambda/k)\le6k$. Also $D_{n-k,d}\le D_{n,d}$, $\prod_i\tau_i!/\tau_i^{\tau_i}\le1$ and $n^k(n-k)!/n!\le(3/2)^k$. Hence
+\begin{equation}\label{eq:short1}
+ \frac{\Tr B_\lambda}{\per A}\le\frac{\Tr C_\lambda}{\per A}\le(c_0\Lambda)^k\prod_{i=1}^\ell D_{\tau_i,d},
+ \qquad
+ \frac{\Tr C_k}{\per A}\le(c_0\Lambda)^kD_{k,d}.
+\end{equation}
+A second bound comes from Lemma~\ref{lem:young}(3) with $\mu=\tau$ and Lemma~\ref{lem:agos}: $\Imm_\tau(A[I])\le f^\tau\kappa^k\per A[I]$, so
+\[
+ \frac{\Tr B_\lambda}{\per A}\le f^\tau\kappa^k\frac{\Tr C_k}{\per A}\le f^\tau(c_0\Lambda)^kD_{k,d}.
+\]
+By Lemma~\ref{lem:dims}(2), $f^\lambda\ge\frac12\binom nkf^\tau\ge\frac12(n/k)^kf^\tau$. Using one bound for each factor of $(\Tr B_\lambda)^2$, the factor $f^\tau$ cancels:
+\[
+ m_2(\lambda,A)\le\frac{(\Tr B_\lambda)^2}{f^\lambda(\per A)^2}\le2\Bigl(\frac kn\Bigr)^k(c_0\Lambda)^{2k}D_{k,d}\prod_iD_{\tau_i,d}.
+\]
+Now $D_{s,d}\le\binom{s+d}{s}\le[e(1+d/s)]^s$, and the weighted arithmetic--geometric mean inequality gives $\prod_i(1+d/\tau_i)^{\tau_i/k}\le1+d\ell/k$. Therefore
+\begin{equation}\label{eq:short2}
+ m_2(\lambda,A)\le2\Bigl[\frac{c_0\Lambda^2}{n}\,\frac{(k+d)(k+d\ell)}{k}\Bigr]^k\le2\Bigl[\frac{c_0\Lambda^2(k+d^2)}{n}\Bigr]^k,
+\end{equation}
+using $\ell\le\min(d,k)$ (if $k\ge d$ the middle factor is at most $2(k+d^2)$; if $k<d$ it is at most $(2d)(1+d)\le4d^2$).
+
+\emph{Uniformity.} Suppose $m_2$ does not tend to zero uniformly; take a violating sequence of shapes and inputs and pass to a subsequence on which $k/n$ converges. If $k/n\to0$, then $k\Lambda^2/n\to0$ and $d^2\Lambda^2/n\le d^2(\log(en))^2/n\to0$, so the bracket in \eqref{eq:short2} tends to zero and so does $m_2$, a contradiction. Otherwise $k/n\ge c_1$ along the subsequence, for some $c_1\in(0,\frac12]$.
+
+\emph{Long tails.} Put $p_i=\lambda_i/n$ (exact proportions at each $n$). We claim that $F_m(p_1^{3/2},\dots,p_m^{3/2})\le-\delta_1<0$, with $\delta_1$ independent of the number $m$ of rows. Some union of rows has total proportion $\pi_*$ in $[\frac14,1-\frac{c_1}2]$: if $p_1\ge\frac12$ take the first row ($p_1\le1-c_1$); otherwise add rows one by one until the total first reaches $\frac14$, which happens below $\frac34$. Lemma~\ref{lem:merge}, merging within this union and within its complement, gives $F_m(p^{3/2})\le F_2(\pi_*^{3/2},(1-\pi_*)^{3/2})$, and the right side is negative and continuous on the compact interval, so it is at most $-\delta_1$. Lemma~\ref{lem:trace} with these weights gives
+\[
+ \frac{\Tr C_\lambda}{\per A}\le\prod_iD_{\lambda_i,d}\,\frac{e^{\frac32nH(p)-n\delta_1}}{N_\lambda},
+\]
+and with $N_\lambda\ge e^{nH(p)}(n+1)^{-d}$ (the standard multinomial bound for at most $d$ parts) and Lemma~\ref{lem:dims}(1),
+\[
+ m_2\le\frac1{f^\lambda}\Bigl(\frac{\Tr C_\lambda}{\per A}\Bigr)^2\le(n+1)^{3d}\binom{n+d^2}{n}^3e^{-2n\delta_1}.
+\]
+Since $d^2=o(n)$ and $d\log n=o(n)$, $\log\binom{n+d^2}{n}\le d^2\log(e(1+n/d^2))=o(n)$, so $m_2\le e^{-2\delta_1n+o(n)}\to0$. This proves part~1; part~1 for $m_1$ follows from $m_1^2\le m_2$.
+
+\subsection{The first moment: proof of part 2}
+Assume $d\log n=o(n)$, and keep the notation above.
+
+\emph{Short tails.} If $k=o(n)$, the second trace bound, \eqref{eq:short1} and Lemma~\ref{lem:dims}(2) give
+\[
+ m_1(\lambda,A)\le\frac{f^\tau(c_0\Lambda)^kD_{k,d}}{\frac12\binom nkf^\tau}\le2\Bigl[\frac{c_0(k+d)\log(en/k)}{n}\Bigr]^k,
+\]
+and the bracket tends to zero because $k\log(en/k)/n\to0$ and $d\log(en/k)/n\le d\log(en)/n\to0$.
+
+\emph{Long tails.} Pass to a subsequence on which $\lambda_i/n\to p_i$ for every $i$ (padding with zeros), and put $\bar p=\sum_ip_i\le1$. Here $p_1<1$.
+
+If $\bar p<1$, use the rank bound of Lemma~\ref{lem:blocks}(2), Lemma~\ref{lem:agos} and the hook-content formula $s_\lambda(1^d)/f^\lambda=\prod_{(i,j)\in\lambda}(d+j-i)/n!$:
+\[
+ m_1\le\frac{s_\lambda(1^d)\,\kappa^n\per A}{f^\lambda\per A}=\frac{\kappa^n}{n!}\prod_{(i,j)\in\lambda}(d+j-i)\le(\kappa e)^n\prod_i\Bigl(\frac{d+\lambda_i}n\Bigr)^{\lambda_i}.
+\]
+Fix $J$. Eventually at least $(1-\bar p)n/2$ cells lie below row $J$, and each factor in those rows is at most $(d+\lambda_{J+1})/n$, while every factor is at most $1+d/n$. Hence $\limsup\frac1n\log m_1\le\log(\kappa e)+\frac{1-\bar p}2\log(p_{J+1}+o(1))$, using $d=o(n)$. As $J\to\infty$, $p_{J+1}\to0$ and the bound tends to $-\infty$.
+
+If $\bar p=1$, at least two $p_i$ are positive. Fix $J$ with $p_J>0$ (taking all positive rows if there are finitely many), let $\mu$ be the shape formed by the rows below row $J$, with $k_*$ cells, and let $w=(p_1,\dots,p_J,w_*)$ with $w_*=1-\sum_{i\le J}p_i$, the limiting proportion of $k_*$. Lemma~\ref{lem:young}(3) and Lemma~\ref{lem:agos} give $\Tr B_\lambda\le\kappa^{k_*}f^\mu\Tr C_\alpha$ with $\alpha=(\lambda_1,\dots,\lambda_J,k_*)$. The hooks of cells below row $J$ are their hooks in $\mu$, and a cell in row $i\le J$ and column $j$ has hook length at most $\lambda_i-j+d$; so by the hook length formula $f^\lambda\ge f^\mu N_\alpha\prod_{i\le J}\binom{\lambda_i+d-1}{d-1}^{-1}=f^\mu N_\alpha e^{-o(n)}$, since $d\log n=o(n)$. In Lemma~\ref{lem:trace} the $J+1$ factors $D_{\alpha_i,d}$ also cost $e^{o(n)}$. Taking weights $w_i^{3/2}$ (positive weights tending to zero for zero proportions), Stirling's formula at fixed length and Lemma~\ref{lem:merge} give
+\[
+ \limsup_{n\to\infty}\frac1n\log m_1\le w_*\log\kappa+F_{J+1}(w^{3/2})-\tfrac12H(w)\le w_*\log\kappa-\tfrac12H(w).
+\]
+Grouping gives $H(w)\ge-p_1\log p_1-(1-p_1)\log(1-p_1)>0$, and $w_*\to0$ as $J$ increases (or $w_*=0$ if finitely many rows are positive). Choosing $J$ large makes the bound negative. Every violating sequence has a subsequence in one of these cases, which proves part~2.
+
+\section{The standard representation at every order and rank}\label{sec:threshold}
+This section proves Theorem~\ref{thm:standard}. Unlike the previous sections it gives explicit bounds valid for every $n$ and $d$.
+
+\begin{proof}[Proof of Theorem~\ref{thm:standard}]
+Normalise the vectors $v_i\in\C^d$ to unit length. Let $g$ be a standard complex Gaussian vector in $\C^d$, put $\xi_i=|v_i^*g|^2$, and let $\nu$ be the probability measure with density $\prod_i\xi_i/\per A$ with respect to the law of $g$ (this is a probability by \eqref{eq:wick}). By \eqref{eq:wick},
+\[
+ \E_\nu\frac1{\xi_i}=\frac{\per A(i,i)}{\per A},\qquad
+ \Theta_A:=\E_\nu\prod_i\Bigl(1+\frac1{\xi_i}\Bigr)=\sum_{S\subseteq[n]}\frac{\per A[S^c]}{\per A}=\frac{\per(A+I)}{\per A}.
+\]
+Fix $i$ and rotate coordinates so that $v_i$ is the first basis vector, with first coordinate $z$ of $g$. As a polynomial in $z$, $\prod_jv_j^*g=z\sum_{e\ge0}r_ez^e$ with coefficients $r_e$ depending on the other coordinates. Averaging $|\prod_jv_j^*g|^2$ over the phase of $z$ removes the cross terms, so under $\nu$ the variable $\xi_i=|z|^2$ is a mixture of gamma laws with shape $e+2\ge2$ and unit scale. For the gamma law of shape $s+1$ with $s\ge1$, $\E(1/\xi)=1/s$ and
+\[
+ \E\log(1+1/\xi)\ge\E\frac1{1+\xi}\ge\frac1{1+\E\xi}=\frac1{s+2}\ge\frac1{3s}.
+\]
+Both sides are linear in the mixture, so $\E_\nu(1/\xi_i)\le3\E_\nu\log(1+1/\xi_i)$. Summing over $i$ and using Jensen's inequality,
+\[
+ \frac{\Tr F_A}{\per A}=\sum_i\E_\nu\frac1{\xi_i}\le3\,\E_\nu\log\prod_i\Bigl(1+\frac1{\xi_i}\Bigr)\le3\log\Theta_A .
+\]
+To bound $\Theta_A$, use \eqref{eq:liebmulti}: $\per A[S^c]/\per A\le1/\per A[S]$. For $|S|=k$, \eqref{eq:sphere} and Jensen's inequality give $\per A[S]=k!D_{k,d}\E_u\prod_{i\in S}|v_i^*u|^2\ge k!\exp(-kH_{d-1})\ge k!/(ed)^k$, where $\E\log|v^*u|^2=-H_{d-1}=-(1+\frac12+\dots+\frac1{d-1})$ for a unit vector $v$ and $H_{d-1}\le1+\log d$. Hence
+\[
+ \Theta_A\le\sum_{k=0}^n\binom nk\frac{(ed)^k}{k!}\le\sum_{k\ge0}\frac{(end)^k}{(k!)^2}\le\Bigl(\sum_{k\ge0}\frac{(\sqrt{end})^k}{k!}\Bigr)^2=e^{2\sqrt{end}} .
+\]
+So $\Tr F_A\le6\sqrt{end}\,\per A$, and \eqref{eq:stdmoments} gives the bound on $m_1$. For $m_2$ use $\Tr F_A^2\le\lambda_{\max}(F_A)\Tr F_A$ and $\lambda_{\max}(F_A)\le(\log n+5)\per A$ \cite[Proposition~2.4]{EPBS}, valid at every rank.
+
+For the lower bound repeat the $j$th vector of an orthonormal basis of $\R^d$ exactly $n_j\ge1$ times, $\sum_jn_j=n$. Then $A=J_{n_1}\oplus\cdots\oplus J_{n_d}$, $\per A=\prod_jn_j!$, and $F_A/\per A=\bigoplus_jn_j^{-1}J_{n_j}$ is the orthogonal projection onto the $d$ block-constant vectors, so $\Tr F_A/\per A=\Tr F_A^2/(\per A)^2=d$ and both standard moments equal $(d-1)/(n-1)$. The remaining statements follow: $m_1\to0$ uniformly if $\sqrt{nd}=o(n)$, that is $d=o(n)$, and not otherwise; $m_2\to0$ if $\sqrt{nd}\log n=o(n)$, that is $d(\log n)^2=o(n)$; and the final sentence of the theorem is the condition that the upper bound for $m_2$ be at most one.
+\end{proof}
+For $d=2$ and $n=10^5$, $6\sqrt{2\mathrm en}(\log n+5)\approx7.3\times10^4\le n$; since $\sqrt n/(\log n+5)$ is increasing for $n>1$, the condition then holds for every larger $n$. This gives the example after Theorem~\ref{thm:standard}.
+
+\section{Remarks and open problems}\label{sec:remarks}
+This section relates the results to Chollet's inequality and lists questions left open.
+
+\paragraph{Chollet's inequality.} Lavi's identity $n!\per(A\circ\overline A)=\sum_\lambda f^\lambda\Tr B_\lambda(A)^2$ \cite[eq.~(2.5)]{Lavi} and Theorem~\ref{thm:main} give $\per(A\circ\overline A)\le(1/n!+M_2^\K(n,d))(\per A)^2$, hence, by Cauchy--Schwarz $|\per(A\circ B)|^2\le\per(A\circ\overline A)\per(B\circ\overline B)$ \cite[eq.~(2.6)]{Lavi}, an eventual Chollet inequality for pairs $A,B$ that both have rank at most $d$. This consequence is much weaker than what direct estimates give: for a correlation matrix of rank at most $d$, Ma \cite[Lemma~3.1]{Ma} shows $\per A\ge d(d+1)\cdots(d+n-1)e^{-nH_{d-1}}$, while $\per(A\circ\overline A)\le n!$, so the self-Chollet ratio already decays faster than exponentially. We therefore do not count the Chollet consequence as a contribution of this paper.
+
+\paragraph{Open problems.}
+\begin{enumerate}
+\item \emph{An effective threshold.} The argument of Section~\ref{sec:fixed} is a compactness argument and gives no value of $n_0(d)$. Making the gap in Lemma~\ref{lem:merge} and the error terms of Section~\ref{sec:trace} explicit would give an explicit $n_0(d)$, and at rank four, where Pate's results stop, it would reduce the ordinary-immanant conjecture to finitely many orders.
+\item \emph{Real constants.} At real rank $d\ge3$ the leading constants of $M_1^\R$ and $M_2^\R$ lie between $\frac12$ (respectively $\frac14$) and $d-1$. The real rank-three construction of \cite{EPBS} suggests $(d-1)/2$ and $(d-1)/4$ as candidates.
+\item \emph{Growing rank.} For the first moment Theorem~\ref{thm:standard} shows that $d=o(n)$ is necessary, while Theorem~\ref{thm:growing} needs $d\log n=o(n)$. For the second moment the gap is between $d=o(n)$ (necessary) and $d\log n=o(\sqrt n)$ (sufficient); for the standard shape alone, $d(\log n)^2=o(n)$ suffices.
+\item \emph{Subgroups.} Lieb's full conjecture concerns characters of all subgroups of $S_n$. The method here uses irreducible characters of $S_n$ only.
+\end{enumerate}
+
+\section*{Data and code availability}
+The script \texttt{code/check\_dominance.py} (Python standard library only) checks on explicit finite examples the identities and inequalities used in the proofs: positivity, vanishing and trace identities of all blocks for $n\le6$ (exact), the Young and Lieb trace bounds, the real rank-two trace bound and the block examples (exact), and, in floating point with a stated tolerance, the scalar inequality of Lemma~\ref{lem:merge}, the trace bounds of Section~\ref{sec:trace}, the chain of inequalities in Section~\ref{sec:threshold} and the test-vector bound of Section~\ref{sec:standard} on small frames. Its output is in \texttt{results/check\_dominance.txt}. The theorems are proved analytically; the script is a check of the ingredients, not part of any proof.
+
+\section*{Use of AI tools}
+The research, the proofs and this manuscript were produced with substantial assistance from AI language models, under human direction. All arguments were checked by independent AI-assisted reviews and by the finite computations described above. Responsibility for the content rests with the author.
+
+\begin{thebibliography}{99}\small\setlength{\itemsep}{2pt}
+\bibitem{AGOS} N. Anari, L. Gurvits, S. Oveis Gharan and A. Saberi. Simply exponential approximation of the permanent of positive semidefinite matrices. In \emph{2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS)}, 914--925, 2017. \url{https://doi.org/10.1109/FOCS.2017.89}; arXiv:1704.03486.
+\bibitem{EPBS} Anonymous. Sharp logarithmic growth of the Bapat--Sunder eigenvalue ratio. Evidence Press, 2026. \url{https://doi.org/10.5281/zenodo.24509057}
+\bibitem{BS} R. B. Bapat and V. S. Sunder. An extremal property of the permanent and the determinant. \emph{Linear Algebra Appl.} 76 (1986), 153--163. \url{https://doi.org/10.1016/0024-3795(86)90220-X}
+\bibitem{Djokovic} D. \v{Z}. Djokovi\'c. Simple proof of a theorem on permanents. \emph{Glasgow Math. J.} 10 (1969), 52--54. \url{https://doi.org/10.1017/S0017089500000525}
+\bibitem{Lavi} Y. Lavi. A conjecture on the permanent of positive semidefinite matrices. Preprint hexagon:2611.00429v1, 26 September 2026. \url{https://hexagonmath.org/pdf/2611.00429v1}
+\bibitem{Li} Y. Li. Lieb's permanental dominance conjecture for ordinary immanants through order fifteen. arXiv:2609.13412, 2026. \url{https://arxiv.org/abs/2609.13412}
+\bibitem{Liq} liqsweep. Permanent-on-top holds for real matrices of rank two. Preprint, September 2026. \url{https://github.com/blueberryvertigo/permanent-on-top-rank-two/blob/8a2195b295fe8ab187b895840f3b3238d997292c/pot.typ} (commit \texttt{8a2195b}).
+\bibitem{Lieb} E. H. Lieb. Proofs of some conjectures on permanents. \emph{J. Math. Mech.} 16 (1966), 127--134. \url{https://doi.org/10.1512/iumj.1967.16.16008}
+\bibitem{Ma} Y. Ma. Quantitative Chollet inequalities for matrices of rank at most four: spectral bounds and an order-nine tight-frame construction. arXiv:2609.37461, 2026. \url{https://arxiv.org/abs/2609.37461}
+\bibitem{Pate99} T. H. Pate. Tensor inequalities, $\xi$-functions and inequalities involving immanants. \emph{Linear Algebra Appl.} 295 (1999), 31--59. \url{https://doi.org/10.1016/S0024-3795(99)00035-X}
+\bibitem{Shchesnovich} V. S. Shchesnovich. The permanent-on-top conjecture is false. \emph{Linear Algebra Appl.} 490 (2016), 196--201. \url{https://doi.org/10.1016/j.laa.2015.10.034}
+\bibitem{Wanless} I. M. Wanless. Lieb's permanental dominance conjecture. In \emph{The Physics and Mathematics of Elliott Lieb}, vol.~2, 501--516. EMS Press, 2022. \url{https://doi.org/10.4171/90-2/48}; arXiv:2202.01867.
+\end{thebibliography}
+\end{document}

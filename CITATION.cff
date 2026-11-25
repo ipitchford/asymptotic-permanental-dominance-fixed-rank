@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using these metadata."
+type: software
+title: "Asymptotic permanental dominance at fixed Gram rank"
+abstract: "Unrefereed research candidate. For Gram matrices of n vectors in a space of fixed dimension d, the normalised first and second moments of every non-trivial Schur-power block (ordinary immanants and Lavi's quadratic version) tend to zero as n grows, uniformly over all shapes, so Lieb's permanental dominance inequality for ordinary immanants and Lavi's quadratic inequality hold at each fixed rank for all sufficiently large n (threshold not computed). The standard block is eventually the worst, with complex-rank moments asymptotic to (d-1) log n / n and (d-1)(log n)^2 / n. Growing-rank ranges and explicit bounds for the standard block at every n and d are also given."
+authors:
+  - name: "Anonymous"
+version: "0.1.0-candidate"
+date-released: "2026-11-25"
+doi: "10.5281/zenodo.24536861"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.24536861"
+    description: "This version"
+  - type: doi
+    value: "10.5281/zenodo.24536860"
+    description: "All versions (concept DOI)"
+repository-code: "https://github.com/ipitchford/asymptotic-permanental-dominance-fixed-rank"
+url: "https://evidencepress.org/releases/asymptotic-permanental-dominance-fixed-rank/"
+license: CC0-1.0
+keywords:
+  - permanent
+  - immanant
+  - Lieb permanental dominance conjecture
+  - Lavi quadratic conjecture
+  - positive semidefinite matrix
+preferred-citation:
+  type: article
+  title: "Asymptotic permanental dominance at fixed Gram rank"
+  authors:
+    - name: "Anonymous"
+  year: 2026
+  doi: "10.5281/zenodo.24536861"
+  publisher:
+    name: "Zenodo"
+  notes: "Version 0.1.0-candidate; unrefereed"

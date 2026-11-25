@@ -1,0 +1,17 @@
+Release replay environment (25 November 2026, macOS arm64 host)
+Interpreters (printed inside the run, not assumed):
+- `uv run --no-project --python 3.12 python3` resolved to CPython 3.14.7 through the host's python3 shim;
+  code/check_dominance.py ran under it with -O and without -O. It was also run under CPython 3.12.11 with -O.
+Packages: none (standard library only). No compiler.
+Working directory: the package root. Flags: python3 -I -B -O (and -I -B without -O). PYTHONDONTWRITEBYTECODE=1.
+Run time on the release host: about 4 s per run.
+GitHub CI: ubuntu-latest, actions/setup-python 3.12. One job: manifest, the script under -O and without -O, comparison
+with results/check_dominance.txt, a negative control, working tree unchanged.
+Comparison policy (declared before tagging; the same in CI, README.md and REPLAY_RECEIPT.md):
+- Part A (exact arithmetic): every line identical;
+- Part B (floating point): every line identical outside its printed decimals, so every PASS/FAIL line, label and the
+  final line "All checks passed." match exactly; each printed decimal within 1e-5 relative or one unit in its last
+  printed digit, whichever is larger (6 decimals; 3 for one ratio);
+- the interpreter version is not part of the output and is not compared.
+On the release platform all three runs (3.14.7 with and without -O, 3.12.11 with -O) were byte-identical to the
+recorded output.
